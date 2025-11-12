@@ -65,12 +65,14 @@ namespace TestPolygonChecker
 			int points_Y[4] = {11, 0, 11, 4};
 			Assert::IsTrue(isRectangle(points_X, points_Y) == 1);
 		} */
+		// negative slope rectangle (3:1)
 		TEST_METHOD(rectangleSolver_slantedRectangle_008)
 		{
-			int points_X[4] = {23, 32, 29, 20};
-			int points_Y[4] = {0, 12, 12, 9};
+			int points_X[4] = {23, 26, 29, 20};
+			int points_Y[4] = {0, 21, 12, 9};
 			Assert::IsTrue(isRectangle(points_X, points_Y) == 1);
 		}
+		// slots for two extra tests
 		/* TEST_METHOD(rectangleSolver_slantedRectangle_009)
 		{
 			int points_X[4] = { 23, 32, 29, 20 };
@@ -83,16 +85,19 @@ namespace TestPolygonChecker
 			int points_Y[4] = { 0, 12, 12, 9 };
 			Assert::IsTrue(isRectangle(points_X, points_Y) == 1);
 		}  */
-		TEST_METHOD(rectangleSolver_axisAlignedRectangle_011)
-		{
-			int points_X[4] = {23, 32, 29, 20};
-			int points_Y[4] = {0, 12, 12, 9};
+		// rectangle : A(3,8), B(8,8), C(8,11), D(3,11)
+		// : (8,11), (3,11), (3,8), (8,8)
+
+		TEST_METHOD(rectangleSolver_axisAlignedRectangle_001)
+		{ 
+			int points_X[4] = {};
+			int points_Y[4] = {};
 			Assert::IsTrue(isRectangle(points_X, points_Y) == 1);
 		}
-		TEST_METHOD(rectangleSolver_axisAlignedRectangle_011)
+		TEST_METHOD(rectangleSolver_axisAlignedRectangle_002)
 		{
-			int points_X[4] = { 23, 32, 29, 20 };
-			int points_Y[4] = { 0, 12, 12, 9 };
+			int points_X[4] = {};
+			int points_Y[4] = {};
 			Assert::IsTrue(isRectangle(points_X, points_Y) == 1);
 		}
 	};
