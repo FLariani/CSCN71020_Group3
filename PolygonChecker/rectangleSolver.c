@@ -113,7 +113,6 @@ int isRectangle(int points_X[], int points_Y[]) {
 	int pointB[2] = { -1, -1 };
 	int pointC[2] = { -1, -1 };
 	int pointD[2] = { -1, -1 };
-	int y = 3;
 	int map[4] = { -1,-1,-1,-1 }; // add in next iteration
 
 	//gets rid of duplicate points
