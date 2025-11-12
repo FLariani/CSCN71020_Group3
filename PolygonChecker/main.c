@@ -55,7 +55,9 @@ int printShapeMenu() {
 	printf_s("0. Exit\n");
 
 	int shapeChoice;
-
+	//cannot take an input of 9 or it breaks the code (change to %d) -DW
+	//fgets is better to restrict user 
+	//ie. fgets(
 	printf_s("Enter number: ");
 	scanf_s("%1o", &shapeChoice);
 
