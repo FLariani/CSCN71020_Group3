@@ -44,7 +44,16 @@ void printArray(int array[], int size) {
 	}
 	//printf("\n");
 }
-
+int isThreeInRow(int array[]) {
+	/*if the index 2 apart are the same the one between is also same since its sorted*/
+	if (array[0] == array[2] || array[1] == array[4]) {
+		printf("\nthree points share an axis, its not a rectangle\n");
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
 char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
 	char* result = "";
 	
