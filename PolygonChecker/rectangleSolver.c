@@ -33,6 +33,10 @@ void sortLowToHigh(int arrayOne[], int arrayTwo[], int arraySize) {
 		}
 	}
 }
+/*print point:originally did this with loop, then realized i could use a single print statement*/
+void printPoint(int point[]) {
+	printf("(%d,%d) ", point[0], point[1]);
+}
 char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
 	char* result = "";
 	
