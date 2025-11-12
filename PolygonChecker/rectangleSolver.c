@@ -225,4 +225,55 @@ int isRectangle(int points_X[], int points_Y[]) {
 				printf("Not a rectangle");
 				return 0;
 			}
+			else if (counter_max + counter_min == 0) {
+
+				pointB[0] = points_X[max_point[0]];
+				pointB[1] = points_Y[max_point[0]];
+				pointD[0] = points_X[min_point[0]];
+				pointD[1] = points_Y[min_point[0]];
+
+				int index_count = 0;
+
+				for (int i = 0; i < 4; i++) {
+
+					if ((i != max_point[0]) && (i != min_point[0])) {
+
+						y_points[index_count] = i;
+						++index_count;
+					}
+				}
+
+				if (points_Y[y_points[0]] < points_Y[y_points[1]]) {
+
+					pointA[0] = points_X[y_points[0]];
+					pointA[1] = points_Y[y_points[0]];
+					pointC[0] = points_X[y_points[1]];
+					pointC[1] = points_Y[y_points[1]];
+					break;
+				}
+
+				else if (points_Y[y_points[0]] > points_Y[y_points[1]]) {
+
+					pointA[0] = points_X[y_points[1]];
+					pointA[1] = points_Y[y_points[1]];
+					pointC[0] = points_X[y_points[0]];
+					pointC[1] = points_Y[y_points[0]];
+					break;
+				}
+
+				else {
+
+					printf("Not a rectangle");
+					return 0;
+				}
+			}
+
+			else {
+
+				printf("Not a rectangle");
+				return 0;
+			}
+		}
+		//now you have point A to D coordinates
+
 	}
