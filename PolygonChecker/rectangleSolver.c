@@ -106,50 +106,102 @@ int isRectangle(int points_X[], int points_Y[]) {
 	for (int x = 1; x < 4; x++) {
 
 		if (points_X[x] <= min_X) {
-			counter_min++;
+
+			counter_Xmin++;
+
+
 			if (points_X[x] < min_X) {
 
 				min_X = points_X[x];
-				min_point[0] = x;
-				min_point[1] = -1;
-				counter_min = 0;
+				min_Xpoint[0] = x;
+				min_Xpoint[1] = -1;
+				counter_Xmin = 0;
 			}
 
-			else if (counter_min == 1) {
+			else if (counter_Xmin == 1) {
 
-				min_point[1] = x;
+				min_Xpoint[1] = x;
 			}
 
 			else {
 
 				printf("Not a rectangle");
-				return;
+				return 0;
 			}
 		}
 
 		if (points_X[x] >= max_X) {
 
-			counter_max++;
+			counter_Xmax++;
 
 			if (points_X[x] > max_X) {
 
 				max_X = points_X[x];
-				max_point[0] = x;
-				max_point[1] = -1;
-				counter_max = 0;
+				max_Xpoint[0] = x;
+				max_Xpoint[1] = -1;
+				counter_Xmax = 0;
 			}
 
-			else if (counter_max == 1) {
+			else if (counter_Xmax == 1) {
 
-				max_point[1] = x;
+				max_Xpoint[1] = x;
 			}
 
 			else {
 
 				printf("Not a rectangle");
-				return;
+				return 0;
 			}
 		}
+
+		if (points_Y[x] <= min_Y) {
+			counter_Ymin++;
+			if (points_Y[x] < min_Y) {
+
+				min_Y = points_Y[x];
+				min_Ypoint[0] = x;
+				min_Ypoint[1] = -1;
+				counter_Ymin = 0;
+
+			}
+
+			else if (counter_Ymin == 1) {
+
+				min_Ypoint[1] = x;
+
+			}
+
+			else {
+
+				printf("Not a rectangle");
+				return 0;
+			}
+		}
+
+		if (points_Y[x] >= max_Y) {
+
+			counter_Ymax++;
+
+			if (points_Y[x] > max_Y) {
+
+				max_Y = points_Y[x];
+				max_Ypoint[0] = x;
+				max_Ypoint[1] = -1;
+				counter_Ymax = 0;
+			}
+
+			else if (counter_Ymax == 1) {
+
+				max_Ypoint[1] = x;
+			}
+
+			else {
+
+				printf("Not a rectangle");
+				return 0;
+			}
+		}
+	}
 
 		//create the new points
 		while (1) {
