@@ -91,3 +91,63 @@ char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC
 
 	return result;
 }
+
+
+int isRectangle(int points_X[], int points_Y[]) {
+
+	int max_Y, min_Y = points_Y[0];
+	int max_X, min_X = points_X[0];
+	int counter_max, counter_min = 0;
+	int min_point[2] = { 0, -1 };
+	int max_point[2] = { 0, -1 };
+	int pointA[2], pointB[2], pointC[2], pointD[2];
+	int y_points[2];
+
+	for (int x = 1; x < 4; x++) {
+
+		if (points_X[x] <= min_X) {
+			counter_min++;
+			if (points_X[x] < min_X) {
+
+				min_X = points_X[x];
+				min_point[0] = x;
+				min_point[1] = -1;
+				counter_min = 0;
+			}
+
+			else if (counter_min == 1) {
+
+				min_point[1] = x;
+			}
+
+			else {
+
+				printf("Not a rectangle");
+				return;
+			}
+		}
+
+		if (points_X[x] >= max_X) {
+
+			counter_max++;
+
+			if (points_X[x] > max_X) {
+
+				max_X = points_X[x];
+				max_point[0] = x;
+				max_point[1] = -1;
+				counter_max = 0;
+			}
+
+			else if (counter_max == 1) {
+
+				max_point[1] = x;
+			}
+
+			else {
+
+				printf("Not a rectangle");
+				return;
+			}
+		}
+	}
