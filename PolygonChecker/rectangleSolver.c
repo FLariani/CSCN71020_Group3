@@ -7,6 +7,32 @@ void swapper(int i, int j, int Array[]) {
 	Array[j] = Array[i];
 	Array[i] = hold;
 }
+/*swap values at index logic from of the first array from smallest# to bigest#,
+if it's tied sort the ties by bigest# to smallest# of the second array - JW */
+void sortLowToHigh(int arrayOne[], int arrayTwo[], int arraySize) {
+	for (int i = 0; i < arraySize; i++) {
+
+		/* j=i since we already made the first index the lowest we dont have to check again*/
+		for (int j = i; j < arraySize; j++) {
+
+			/*if next index is bigger*/
+			if (arrayOne[i] > arrayOne[j]) {
+
+				/*swap the position of x's is that index is smaller*/
+				swapper(i, j, arrayOne);
+				/*mirror the swap*/
+				swapper(i, j, arrayTwo);
+			}
+			/*if the next element checked is the same swap it base on if y is bigger*/
+			if (arrayOne[i] == arrayOne[j]) {
+				if (arrayTwo[i] > arrayTwo[j]) {
+					swapper(i, j, arrayOne);
+					swapper(i, j, arrayTwo);
+				}
+			}
+		}
+	}
+}
 char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
 	char* result = "";
 	
