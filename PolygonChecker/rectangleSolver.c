@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include "rectangleSolver.h"
+/*swaps the indexs of a value*/
 void swapper(int i, int j, int Array[]) {
 	int hold = Array[j];
 	Array[j] = Array[i];
@@ -44,6 +45,7 @@ void printArray(int array[], int size) {
 	}
 	//printf("\n");
 }
+/* finds if three in a row in a sorted function*/
 int isThreeInRow(int array[]) {
 	/*if the index 2 apart are the same the one between is also same since its sorted*/
 	if (array[0] == array[2] || array[1] == array[4]) {
@@ -53,6 +55,13 @@ int isThreeInRow(int array[]) {
 	else {
 		return 0;
 	}
+}
+/*finds distance between two points*/
+float dOfPoints(int pointP[], int pointQ[]) {
+	int deltaX = pointP[0] - pointQ[0];
+	int deltaY = pointP[1] - pointQ[1];
+	float distance = sqrtf((powf((float)deltaX, 2)) + (powf((float)deltaY, 2)));
+	return distance;
 }
 char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
 	char* result = "";
