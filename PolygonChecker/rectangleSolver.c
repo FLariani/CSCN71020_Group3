@@ -150,4 +150,79 @@ int isRectangle(int points_X[], int points_Y[]) {
 				return;
 			}
 		}
+
+		//create the new points
+		while (1) {
+
+			if (counter_max + counter_min == 2) {
+
+				if ((points_Y[min_point[0]] == points_Y[min_point[1]]) || (points_Y[max_point[0]] == points_Y[max_point[1]])) {
+
+					printf("Not a rectangle");
+					return 0;
+				}
+
+				if (points_Y[min_point[0]] == points_Y[max_point[0]]) {
+
+					if ((points_Y[min_point[0]] < points_Y[min_point[1]]) && (points_Y[min_point[0]] < points_Y[max_point[1]])) {
+
+						pointA[0] = points_X[min_point[0]];
+						pointA[1] = points_Y[min_point[0]];
+						pointB[0] = points_X[max_point[0]];
+						pointB[1] = points_Y[max_point[0]];
+						pointC[0] = points_X[max_point[1]];
+						pointC[1] = points_Y[max_point[1]];
+						pointD[0] = points_X[min_point[1]];
+						pointD[1] = points_Y[min_point[1]];
+						break;
+					}
+
+					else if ((points_Y[min_point[0]] > points_Y[min_point[1]]) && (points_Y[min_point[0]] > points_Y[max_point[1]])) {
+
+						pointA[0] = points_X[min_point[1]];
+						pointA[1] = points_Y[min_point[1]];
+						pointB[0] = points_X[max_point[1]];
+						pointB[1] = points_Y[max_point[1]];
+						pointC[0] = points_X[max_point[0]];
+						pointC[1] = points_Y[max_point[0]];
+						pointD[0] = points_X[min_point[0]];
+						pointD[1] = points_Y[min_point[0]];
+						break;
+					}
+				}
+
+				//need to fix later and then add one for counter_max +counter_min==0
+				//else overall should be a return saying not a rectangle
+				else if (points_Y[min_point[0]] == points_Y[max_point[1]]) {
+
+					if ((points_Y[min_point[0]] < points_Y[min_point[1]]) && (points_Y[min_point[0]] < points_Y[max_point[0]])) {
+
+						pointA[0] = points_X[min_point[0]];
+						pointA[1] = points_Y[min_point[0]];
+						pointB[0] = points_X[max_point[1]];
+						pointB[1] = points_Y[max_point[1]];
+						pointC[0] = points_X[max_point[0]];
+						pointC[1] = points_Y[max_point[0]];
+						pointD[0] = points_X[min_point[1]];
+						pointD[1] = points_Y[min_point[1]];
+						break;
+					}
+
+					else if ((points_Y[min_point[0]] < points_Y[min_point[1]]) && (points_Y[min_point[0]] < points_Y[max_point[0]])) {
+
+						pointA[0] = points_X[min_point[1]];
+						pointA[1] = points_Y[min_point[1]];
+						pointB[0] = points_X[max_point[0]];
+						pointB[1] = points_Y[max_point[0]];
+						pointC[0] = points_X[max_point[1]];
+						pointC[1] = points_Y[max_point[1]];
+						pointD[0] = points_X[min_point[0]];
+						pointD[1] = points_Y[min_point[0]];
+						break;
+					}
+				}
+
+				printf("Not a rectangle");
+				return 0;
+			}
 	}
