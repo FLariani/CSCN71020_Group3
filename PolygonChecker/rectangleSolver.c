@@ -78,6 +78,45 @@ int isLineOnAxis(int array[]) {
 		return 0;
 	}
 }
+int findArrowCase(int arrayXs[], int arrayYs[]) {
+	int pointA[2];
+	int pointB[2];
+	int pointC[2];
+	int pointD[2];
+	pointA[0] = arrayXs[0];
+	pointA[1] = arrayYs[0];
+	pointB[0] = arrayXs[1];
+	pointB[1] = arrayYs[1];
+	pointC[0] = arrayXs[2];
+	pointC[1] = arrayYs[2];
+	pointD[0] = arrayXs[3];
+	pointD[1] = arrayYs[3];
+	int isBInC = pointIsInTri(pointA, pointC, pointD, pointB);
+	int isCInB = pointIsInTri(pointA, pointB, pointD, pointD);
+	if (isBInC == 1 || isCInB == 1) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+//find  the area of a triangle given point abc
+float triArea(int a[],int b[],int c[]) {}
+//check if point p is in triangle abc
+int pointIsInTri(int a[], int b[], int c[], int p[]) {
+	float mainTri = triArea(a, b, c);
+	float triNoA = triArea(p, b, c);
+	float triNoB = triArea(a, p, c);
+	float triNoC = triArea(a, b, p);
+	float sumTriNoabc = triNoA + triNoB + triNoC;
+	if (mainTri == sumTriNoabc) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+
+}
 char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
 	char* result = "";
 	
