@@ -97,10 +97,10 @@ char* isRectangles(int pointA1, int pointA2, int pointB1, int pointB2, int point
 char* isRectangle(int points_X[], int points_Y[]) {
 
 	int counter[4] = { 0,0,0,0 };
-	int min_Xpoint[2] = { points_X[0], -1};
-	int max_Xpoint[2] = { points_X[0], -1};
-	int min_Ypoint[2] = { points_Y[0], -1};
-	int max_Ypoint[2] = { points_Y[0], -1};
+	int min_Xpoint[2] = { 0, -1};
+	int max_Xpoint[2] = { 0, -1};
+	int min_Ypoint[2] = { 0, -1};
+	int max_Ypoint[2] = { 0, -1};
 	int pointA[2] = { -1, -1 };
 	int pointB[2] = { -1, -1 };
 	int pointC[2] = { -1, -1 };
@@ -124,10 +124,10 @@ char* isRectangle(int points_X[], int points_Y[]) {
 
 		if (points_X[x] <= points_X[min_Xpoint[0]]) {
 
-			counter[0]++;
+			(counter[0])++;
 
 
-			if (points_X[x] < min_Xpoint[0]) {
+			if (points_X[x] < points_X[min_Xpoint[0]]) {
 
 				min_Xpoint[0] = x;
 				min_Xpoint[1] = -1;
@@ -145,9 +145,9 @@ char* isRectangle(int points_X[], int points_Y[]) {
 			}
 		}
 
-		if (points_X[x] >= max_Xpoint) {
+		if (points_X[x] >= points_X[max_Xpoint[0]]) {
 
-			counter[1]++;
+			(counter[1])++;
 
 			if (points_X[x] > points_X[max_Xpoint[0]]) {
 
@@ -167,8 +167,8 @@ char* isRectangle(int points_X[], int points_Y[]) {
 			}
 		}
 
-		if (points_Y[x] <= min_Ypoint) {
-			counter[2]++;
+		if (points_Y[x] <= points_Y[min_Ypoint[0]]) {
+			(counter[2])++;
 			if (points_Y[x] < points_Y[min_Ypoint[0]]) {
 
 				min_Ypoint[0] = x;
@@ -189,9 +189,9 @@ char* isRectangle(int points_X[], int points_Y[]) {
 			}
 		}
 
-		if (points_Y[x] >= max_Ypoint) {
+		if (points_Y[x] >= points_Y[max_Ypoint[0]]) {
 
-			counter[3]++;
+			(counter[3])++;
 
 			if (points_Y[x] > points_Y[max_Ypoint[0]]) {
 
@@ -200,7 +200,7 @@ char* isRectangle(int points_X[], int points_Y[]) {
 				counter[3] = 0;
 			}
 
-			else if (counter == 1) {
+			else if (counter[3] == 1) {
 
 				max_Ypoint[1] = x;
 			}
