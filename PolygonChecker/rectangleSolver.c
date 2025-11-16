@@ -93,22 +93,14 @@ char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC
 }
 
 
-#include <stdio.h>
 
 int isRectangle(int points_X[], int points_Y[]) {
 
-	int max_Y = points_Y[0];
-	int min_Y = points_Y[0];
-	int max_X = points_X[0];
-	int min_X = points_X[0];
-	int counter_Xmin = 0;
-	int counter_Xmax = 0;
-	int counter_Ymin = 0;
-	int counter_Ymax = 0;
-	int min_Xpoint[2] = { 0, -1 };
-	int max_Xpoint[2] = { 0, -1 };
-	int min_Ypoint[2] = { 0, -1 };
-	int max_Ypoint[2] = { 0, -1 };
+	int counter[4] = { 0,0,0,0 };
+	int min_Xpoint[2] = { points_X[0], -1};
+	int max_Xpoint[2] = { points_X[0], -1};
+	int min_Ypoint[2] = { points_Y[0], -1};
+	int max_Ypoint[2] = { points_Y[0], -1};
 	int pointA[2] = { -1, -1 };
 	int pointB[2] = { -1, -1 };
 	int pointC[2] = { -1, -1 };
@@ -116,7 +108,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 	int map[4] = { -1,-1,-1,-1 }; // add in next iteration
 
 	//gets rid of duplicate points
-	for (int x = 0; x < y; x++) {
+	for (int x = 0; x < 3; x++) {
 
 		for (int y = 3; y > x; y--) {
 
@@ -131,20 +123,19 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 	for (int x = 1; x < 4; x++) {
 
-		if (points_X[x] <= min_X) {
+		if (points_X[x] <= points_X[min_Xpoint[0]]) {
 
-			counter_Xmin++;
+			counter[0]++;
 
 
-			if (points_X[x] < min_X) {
+			if (points_X[x] < min_Xpoint[0]) {
 
-				min_X = points_X[x];
 				min_Xpoint[0] = x;
 				min_Xpoint[1] = -1;
-				counter_Xmin = 0;
+				counter[0] = 0;
 			}
 
-			else if (counter_Xmin == 1) {
+			else if (counter[0] == 1) {
 
 				min_Xpoint[1] = x;
 			}
@@ -156,19 +147,18 @@ int isRectangle(int points_X[], int points_Y[]) {
 			}
 		}
 
-		if (points_X[x] >= max_X) {
+		if (points_X[x] >= max_Xpoint) {
 
-			counter_Xmax++;
+			counter[1]++;
 
-			if (points_X[x] > max_X) {
+			if (points_X[x] > points_X[max_Xpoint[0]]) {
 
-				max_X = points_X[x];
 				max_Xpoint[0] = x;
 				max_Xpoint[1] = -1;
-				counter_Xmax = 0;
+				counter[1] = 0;
 			}
 
-			else if (counter_Xmax == 1) {
+			else if (counter[1] == 1) {
 
 				max_Xpoint[1] = x;
 			}
@@ -180,18 +170,17 @@ int isRectangle(int points_X[], int points_Y[]) {
 			}
 		}
 
-		if (points_Y[x] <= min_Y) {
-			counter_Ymin++;
-			if (points_Y[x] < min_Y) {
+		if (points_Y[x] <= min_Ypoint) {
+			counter[2]++;
+			if (points_Y[x] < points_Y[min_Ypoint[0]]) {
 
-				min_Y = points_Y[x];
 				min_Ypoint[0] = x;
 				min_Ypoint[1] = -1;
-				counter_Ymin = 0;
+				counter[2] = 0;
 
 			}
 
-			else if (counter_Ymin == 1) {
+			else if (counter[2] == 1) {
 
 				min_Ypoint[1] = x;
 
@@ -204,19 +193,18 @@ int isRectangle(int points_X[], int points_Y[]) {
 			}
 		}
 
-		if (points_Y[x] >= max_Y) {
+		if (points_Y[x] >= max_Ypoint) {
 
-			counter_Ymax++;
+			counter[3]++;
 
-			if (points_Y[x] > max_Y) {
+			if (points_Y[x] > points_Y[max_Ypoint[0]]) {
 
-				max_Y = points_Y[x];
 				max_Ypoint[0] = x;
 				max_Ypoint[1] = -1;
-				counter_Ymax = 0;
+				counter[3] = 0;
 			}
 
-			else if (counter_Ymax == 1) {
+			else if (counter == 1) {
 
 				max_Ypoint[1] = x;
 			}
@@ -235,7 +223,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 	while (1) {
 		//only allows rectangles now
-		if (counter_Xmax + counter_Xmin + counter_Ymax + counter_Ymin == 4) {
+		if (counter[0] + counter[1] + counter[2] + counter[3] == 4) {
 
 			//check if the first min x point matches the first min y point for A point orientation (bottom left corner)
 			if (min_Xpoint[0] == min_Ypoint[0]) {
@@ -298,8 +286,8 @@ int isRectangle(int points_X[], int points_Y[]) {
 		}
 
 		//checks for unique man/min x/y value shapes
-		else if (counter_Xmax + counter_Xmin + counter_Ymax + counter_Ymin == 0) {
-
+		else if (counter[0] + counter[1] + counter[2] + counter[3] == 0) {
+			
 			pointA[0] = points_X[min_Ypoint[0]];
 			pointA[1] = points_Y[min_Ypoint[0]];
 			pointB[0] = points_X[max_Xpoint[0]];
