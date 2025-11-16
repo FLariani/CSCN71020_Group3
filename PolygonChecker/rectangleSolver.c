@@ -34,20 +34,20 @@ void sortLowToHigh(int arrayOne[], int arrayTwo[], int arraySize) {
 		}
 	}
 }
-/*print point:originally did this with loop, then realized i could use a single print statement*/
+//print point:originally did this with loop, then realized i could use a single print statement
 void printPoint(int point[]) {
 	printf("(%d,%d) ", point[0], point[1]);
 }
-/*print the array passed*/
+//print the array passed
 void printArray(int array[], int size) {
 	for (int i = 0; i < size; i++) {
 		printf("%d ", array[i]);
 	}
 	//printf("\n");
 }
-/* finds if three in a row in a sorted function*/
+//finds if three in a row in a sorted function*/
 int isThreeInRow(int array[]) {
-	/*if the index 2 apart are the same the one between is also same since its sorted*/
+	//if the index 2 apart are the same the one between is also same since its sorted
 	if (array[0] == array[2] || array[1] == array[4]) {
 		printf("\nthree points share an axis, its not a rectangle\n");
 		return 1;
@@ -56,14 +56,14 @@ int isThreeInRow(int array[]) {
 		return 0;
 	}
 }
-/*finds distance between two points*/
+//finds distance between two points
 float dOfPoints(int pointP[], int pointQ[]) {
 	int deltaX = pointP[0] - pointQ[0];
 	int deltaY = pointP[1] - pointQ[1];
 	float distance = sqrtf((powf((float)deltaX, 2)) + (powf((float)deltaY, 2)));
 	return distance;
 }
-/*check if index of an array 0=1 or 2=3*/
+//check if index of an array 0=1 or 2=3
 int isLineOnAxis(int array[]) {
 	if ((array[0] == array[1]) || (array[2] == array[4])) {
 		if ((array[0] == array[1]) || (array[2] == array[4])) {
@@ -78,7 +78,7 @@ int isLineOnAxis(int array[]) {
 		return 0;
 	}
 }
-char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
+char* isRectangles(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
 	char* result = "";
 	
 	if (pointA1 - pointB1 == pointC2 - pointB2 == pointD1 - pointC1 == pointD2 - pointA2)
@@ -94,7 +94,7 @@ char* isRectangle(int pointA1, int pointA2, int pointB1, int pointB2, int pointC
 
 
 
-int isRectangle(int points_X[], int points_Y[]) {
+char* isRectangle(int points_X[], int points_Y[]) {
 
 	int counter[4] = { 0,0,0,0 };
 	int min_Xpoint[2] = { points_X[0], -1};
@@ -114,8 +114,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 			if ((points_X[x] == points_X[y]) && (points_Y[x] == points_Y[y])) {
 
-				printf("Not a rectangle");
-				return 0;
+				return "Not a rectangle";
 			}
 		}
 
@@ -142,8 +141,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 			else {
 
-				printf("Not a rectangle");
-				return 0;
+				return "Not a rectangle";
 			}
 		}
 
@@ -165,8 +163,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 			else {
 
-				printf("Not a rectangle");
-				return 0;
+				return "Not a rectangle";
 			}
 		}
 
@@ -188,8 +185,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 			else {
 
-				printf("Not a rectangle");
-				return 0;
+				return "Not a rectangle";
 			}
 		}
 
@@ -211,8 +207,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 			else {
 
-				printf("Not a rectangle");
-				return 0;
+				return "Not a rectangle";
 			}
 		}
 	}
@@ -240,7 +235,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 					pointC[0] = points_X[max_Xpoint[1]];
 					pointC[1] = points_Y[max_Xpoint[1]];
-					return 1;
+					return "Is a rectangle";
 				}
 
 				//second max x point is bottom right corner
@@ -248,7 +243,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 					pointC[0] = points_X[max_Xpoint[0]];
 					pointC[1] = points_Y[max_Xpoint[0]];
-					return 1;
+					return "Is a rectangle";
 				}
 			}
 
@@ -265,14 +260,14 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 					pointC[0] = points_X[max_Xpoint[1]];
 					pointC[1] = points_Y[max_Xpoint[1]];
-					return 1;
+					return "Is a rectangle";
 				}
 
 				else {
 
 					pointC[0] = points_X[max_Xpoint[0]];
 					pointC[1] = points_Y[max_Xpoint[0]];
-					return 1;
+					return "Is a rectangle";
 				}
 			}
 
@@ -281,8 +276,7 @@ int isRectangle(int points_X[], int points_Y[]) {
 		//gets rid of lines, Vs and more irredgular shapes before then next else if
 		else if ((min_Xpoint[0] == max_Ypoint[0]) || (min_Xpoint[0] == min_Ypoint[0]) || (max_Xpoint[0] == max_Ypoint[0]) || (max_Xpoint[0] == min_Ypoint[0])) {
 
-			printf("Not a rectangle");
-			return 0;
+			return "Not a rectangle";
 		}
 
 		//checks for unique man/min x/y value shapes
@@ -301,18 +295,18 @@ int isRectangle(int points_X[], int points_Y[]) {
 
 			if (((pointC[1] - pointA[1]) * (pointC[1] - pointA[1]) + (pointC[0] - pointA[0]) * (pointC[0] - pointA[0])) == ((pointB[1] - pointD[1]) * (pointB[1] - pointD[1]) + (pointB[0] - pointD[0]) * (pointB[0] - pointD[0]))) {
 
-				return 1;
+				return "Is a rectangle";
 			}
 
 			else {
 
-				return 0;
+				return "Not a rectangle";
 			}
 		}
 
 		else {
-			printf("Not a rectangle");
-			return 0;
+
+			return "Not a rectangle";
 		}
 	}
 }
