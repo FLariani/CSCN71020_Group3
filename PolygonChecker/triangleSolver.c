@@ -23,4 +23,23 @@ char* analyzeTriangle(int side1, int side2, int side3) {
 	return result;
 }
 
+//find  the area of a triangle given point abc
+float triArea(int a[], int b[], int c[]) {}
+//check if point p is in triangle abc
+int pointIsInTri(int a[], int b[], int c[], int p[]) {
+	float mainTri = triArea(a, b, c);
+	float triNoA = triArea(p, b, c);
+	float triNoB = triArea(a, p, c);
+	float triNoC = triArea(a, b, p);
+	float sumTriNoabc = triNoA + triNoB + triNoC;
+	if (mainTri == sumTriNoabc) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+
+}
+
+
 
