@@ -415,6 +415,7 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 
 	//find sorted_points[1], [2], [3] by smallest angle
 	//angle is determined by dx and dy relative to sorted_points[0] or point A
+	//use sorted_x as a tie-breaker for cross==0
 	for (int point_letter = 1; point_letter < 4; point_letter++) {
 
 		int next_point = -1;
@@ -441,7 +442,16 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 
 			if (cross < 0) {
 
-				int next_point = i;
+				next_point = i;
+			}
+
+			else if (cross == 0) {
+
+				// for collinear use sorted_x position as tie-break (closer to left)
+				if (sorted_x[i] < sorted_x[next_point]) {
+
+					next_point = i;
+				}
 			}
 			
 		}
