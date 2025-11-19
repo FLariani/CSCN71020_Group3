@@ -359,6 +359,7 @@ float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 
 void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]) {
 
+	//initializes original index order of points_x[] and points_y to be swapped
 	for (int i = 0; i < 4; i++) {
 
 		sorted_x[i] = i;
@@ -367,7 +368,7 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 
 	for (int i = 0; i < 3; i++) {
 
-		for (int j = i+1; j < 4; j++) {
+		for (int j = i + 1; j < 4; j++) {
 
 			if (points_x[sorted_x[i]] > points_x[sorted_x[j]]) {
 
@@ -375,7 +376,6 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 				sorted_x[i] = sorted_x[j];
 				sorted_x[j] = temp;
 			}
-	
 
 			if (points_y[sorted_y[i]] > points_y[sorted_y[j]]) {
 
@@ -387,8 +387,12 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 	}
 }
 
-void sort4PointsCCW(int points_x[], int point_y[], int sorted_points) {
+void sort4PointsCCW(int points_x[], int points_y[], int sorted_points) {
 
+	int sorted_x[4] = { -1,-1,-1,-1 };
+	int sorted_y[4] = { -1,-1,-1,-1 };
+
+	sortPointsXY(points_x, points_y, sorted_x, sorted_y);
 
 
 }
