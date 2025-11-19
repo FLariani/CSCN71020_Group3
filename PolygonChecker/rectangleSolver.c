@@ -399,7 +399,7 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 	//if there are ties then it finds the lowest x value out of points_x[] index match in sorted_x
 	//sorted_points[0] is equivalent to Point A's index
 	sorted_points[0] = sorted_y[0];
-	for (int i = 1; i < 4; ++i) {
+	for (int i = 1; i < 4; i++) {
 
 		if (points_y[sorted_y[i]] < points_y[sorted_points[0]] ||
 			(points_y[sorted_y[i]] == points_y[sorted_points[0]] && points_x[sorted_y[i]] < points_x[sorted_points[0]])) {
@@ -411,20 +411,20 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 	//creates a boolean check for usable indexes
 	int used_points[4] = { 0,0,0,0 };
 	used_points[sorted_points[0]] = 1;
-	int next_point = -1;
+	
 
 	//find sorted_points[1], [2], [3] by smallest angle
 	//angle is determined by dx and dy relative to sorted_points[0] or point A
-	for (int point_letter = 1; point_letter < 4; ++point_letter) {
+	for (int point_letter = 1; point_letter < 4; point_letter++) {
 
-		
+		int next_point = -1;
 
-		for (int i = 0; i < 3; ++i) {
+		for (int i = 0; i < 4; i++) {
 
 			double dx1 = (double)points_x[i] - points_x[sorted_points[0]];
 			double dy1 = (double)points_y[i] - points_y[sorted_points[0]];
-			double dx2 = (double)points_x[i+1] - points_x[sorted_points[0]];
-			double dy2 = (double)points_y[i+1] - points_y[sorted_points[0]];
+			double dx2 = (double)points_x[next_point] - points_x[sorted_points[0]];
+			double dy2 = (double)points_y[next_point] - points_y[sorted_points[0]];
 
 			double cross = dy1 * dx2 - dy2 * dx1;
 
