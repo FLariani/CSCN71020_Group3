@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include "rectangleSolver.h"
+#include "triangleSolver.h"
 /*swaps the indexs of a value*/
 void swapper(int i, int j, int Array[]) {
 	int hold = Array[j];
@@ -332,23 +333,25 @@ int findArrowCase(int arrayXs[], int arrayYs[]) {
 		return 0;
 	}
 }
-//find  the area of a triangle given point abc
-float triArea(int a[], int b[], int c[]) {}
-//check if point p is in triangle abc
-int pointIsInTri(int a[], int b[], int c[], int p[]) {
-	float mainTri = triArea(a, b, c);
-	float triNoA = triArea(p, b, c);
-	float triNoB = triArea(a, p, c);
-	float triNoC = triArea(a, b, p);
-	float sumTriNoabc = triNoA + triNoB + triNoC;
-	if (mainTri == sumTriNoabc) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
 
+// takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
+float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
+	float sum=0;
+	sum += dOfPoints( &PointA, &PointB);
+	sum += dOfPoints(&PointB, &PointC);
+	sum += dOfPoints(&PointC, &PointD);
+	sum += dOfPoints(&PointD, &PointA);
+	return sum;
 }
+//area
+float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
+	float Area = 0;
+	float sideA= dOfPoints(&PointA, &PointB);
+	float sideB = dOfPoints(&PointA, &PointB);
+	Area = sideA * sideB;
+	return Area;
+}
+
 
 
 //ok the working ordering function for the 4 points outputs an indexes (a,b,c,d)
@@ -384,6 +387,43 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 				int temp = sorted_y[i];
 				sorted_y[i] = sorted_y[j+1];
 				sorted_y[j+1] = temp;
+			}
+		}
+	}
+}
+
+void sort4PointsCCW(int points_x[], int point_y[], int sorted_points) {
+
+
+
+}	for (int i = 0; i < 4; i++) {
+
+		sorted_x[i] = i;
+		sorted_y[i] = i;
+	}
+
+	for (int i = 0; i < 4; i++) {
+
+		for (int j = i; j < 3; j++) {
+
+			if (points_x[sorted_x[i]] > points_x[sorted_x[j]]) {
+
+				int temp = sorted_x[i];
+				sorted_x[i] = sorted_x[j + 1];
+				sorted_x[j + 1] = temp;
+			}
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+
+		for (int j = i; j < 3; j++) {
+
+			if (points_y[sorted_y[i]] > points_y[sorted_y[j]]) {
+
+				int temp = sorted_y[i];
+				sorted_y[i] = sorted_y[j + 1];
+				sorted_y[j + 1] = temp;
 			}
 		}
 	}
