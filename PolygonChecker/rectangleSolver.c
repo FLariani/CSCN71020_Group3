@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "rectangleSolver.h"
 #include "triangleSolver.h"
@@ -403,9 +404,39 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 		if (points_y[sorted_y[i]] < points_y[sorted_points[0]] ||
 			(points_y[sorted_y[i]] == points_y[sorted_points[0]] && points_x[sorted_y[i]] < points_x[sorted_points[0]])) {
 
-			sorted_points[0] = sorted_y[i];
+			sorted_points[0]= sorted_y[i];
 		}
 	}
 
+	//creates a boolean check for usable indexes
+	int used_points[4] = { 0,0,0,0 };
+	used_points[sorted_points[0]] = 1;
+	int next_point = -1;
 
+	//find sorted_points[1], [2], [3] by smallest angle
+	//angle is determined by dx and dy relative to sorted_points[0] or point A
+	for (int point_letter = 1; point_letter < 4; ++point_letter) {
+
+		
+
+		for (int i = 0; i < 3; ++i) {
+
+			double dx1 = (double)points_x[i] - points_x[sorted_points[0]];
+			double dy1 = (double)points_y[i] - points_y[sorted_points[0]];
+			double dx2 = (double)points_x[i+1] - points_x[sorted_points[0]];
+			double dy2 = (double)points_y[i+1] - points_y[sorted_points[0]];
+
+			double cross = dy1 * dx2 - dy2 * dx1;
+
+			if (cross < 0) {
+
+				int next_point = i;
+			}
+			
+		}
+
+		sorted_points[point_letter] = next_point;
+		used_points[next_point] = 1;
+
+	}
 }
