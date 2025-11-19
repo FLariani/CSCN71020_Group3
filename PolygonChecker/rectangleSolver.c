@@ -365,65 +365,23 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 		sorted_y[i] = i;
 	}
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 3; i++) {
 
-		for (int j = i; j < 3; j++) {
-
-			if (points_x[sorted_x[i]] > points_x[sorted_x[j]]) {
-
-				int temp = sorted_x[i];
-				sorted_x[i] = sorted_x[j+1];
-				sorted_x[j+1] = temp;
-			}
-		}
-	}
-
-	for (int i = 0; i < 4; i++) {
-
-		for (int j = i; j < 3; j++) {
-
-			if (points_y[sorted_y[i]] > points_y[sorted_y[j]]) {
-
-				int temp = sorted_y[i];
-				sorted_y[i] = sorted_y[j+1];
-				sorted_y[j+1] = temp;
-			}
-		}
-	}
-}
-
-void sort4PointsCCW(int points_x[], int point_y[], int sorted_points) {
-
-
-
-}	for (int i = 0; i < 4; i++) {
-
-		sorted_x[i] = i;
-		sorted_y[i] = i;
-	}
-
-	for (int i = 0; i < 4; i++) {
-
-		for (int j = i; j < 3; j++) {
+		for (int j = i+1; j < 4; j++) {
 
 			if (points_x[sorted_x[i]] > points_x[sorted_x[j]]) {
 
 				int temp = sorted_x[i];
-				sorted_x[i] = sorted_x[j + 1];
-				sorted_x[j + 1] = temp;
+				sorted_x[i] = sorted_x[j];
+				sorted_x[j] = temp;
 			}
-		}
-	}
-
-	for (int i = 0; i < 4; i++) {
-
-		for (int j = i; j < 3; j++) {
+	
 
 			if (points_y[sorted_y[i]] > points_y[sorted_y[j]]) {
 
 				int temp = sorted_y[i];
-				sorted_y[i] = sorted_y[j + 1];
-				sorted_y[j + 1] = temp;
+				sorted_y[i] = sorted_y[j];
+				sorted_y[j] = temp;
 			}
 		}
 	}
