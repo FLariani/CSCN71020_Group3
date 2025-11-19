@@ -421,6 +421,17 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 
 		for (int i = 0; i < 4; i++) {
 
+			if (used_points[i]) {
+
+				continue;
+			}
+
+			if (next_point == -1) {
+
+				next_point = i;
+				continue;
+			}
+
 			double dx1 = (double)points_x[i] - points_x[sorted_points[0]];
 			double dy1 = (double)points_y[i] - points_y[sorted_points[0]];
 			double dx2 = (double)points_x[next_point] - points_x[sorted_points[0]];
