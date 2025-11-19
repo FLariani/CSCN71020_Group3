@@ -2,7 +2,6 @@
 #include <stdbool.h>
 
 #include "rectangleSolver.h"
-#include "triangleSolver.h"
 /*swaps the indexs of a value*/
 void swapper(int i, int j, int Array[]) {
 	int hold = Array[j];
@@ -333,12 +332,37 @@ int findArrowCase(int arrayXs[], int arrayYs[]) {
 		return 0;
 	}
 }
+//find  the area of a triangle given point abc
+float triArea(int a[], int b[], int c[]) {}
+//check if point p is in triangle abc
+int pointIsInTri(int a[], int b[], int c[], int p[]) {
+	float mainTri = triArea(a, b, c);
+	float triNoA = triArea(p, b, c);
+	float triNoB = triArea(a, p, c);
+	float triNoC = triArea(a, b, p);
+	float sumTriNoabc = triNoA + triNoB + triNoC;
+	if (mainTri == sumTriNoabc) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+
+}
 // takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
-float RectPerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
+float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
 	float sum=0;
 	sum += dOfPoints( &PointA, &PointB);
 	sum += dOfPoints(&PointB, &PointC);
 	sum += dOfPoints(&PointC, &PointD);
 	sum += dOfPoints(&PointD, &PointA);
 	return sum;
+}
+//area
+float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
+	float Area = 0;
+	float sideA= dOfPoints(&PointA, &PointB);
+	float sideB = dOfPoints(&PointA, &PointB);
+	Area = sideA * sideB;
+	return Area;
 }
