@@ -336,8 +336,8 @@ int findArrowCase(int arrayXs[], int arrayYs[]) {
 
 // takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
 float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
-	float sum=0;
-	sum += dOfPoints( &PointA, &PointB);
+	float sum = 0;
+	sum += dOfPoints(&PointA, &PointB);
 	sum += dOfPoints(&PointB, &PointC);
 	sum += dOfPoints(&PointC, &PointD);
 	sum += dOfPoints(&PointD, &PointA);
@@ -346,7 +346,7 @@ float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
 //area
 float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 	float Area = 0;
-	float sideA= dOfPoints(&PointA, &PointB);
+	float sideA = dOfPoints(&PointA, &PointB);
 	float sideB = dOfPoints(&PointA, &PointB);
 	Area = sideA * sideB;
 	return Area;
@@ -387,12 +387,25 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 	}
 }
 
-void sort4PointsCCW(int points_x[], int points_y[], int sorted_points) {
+void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 
 	int sorted_x[4] = { -1,-1,-1,-1 };
 	int sorted_y[4] = { -1,-1,-1,-1 };
 
-	sortPointsXY(points_x, points_y, sorted_x, sorted_y);
+	sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+	//sorted_points[0] is the lowest y value out of the whole points_y[] using the sorted_y index
+	//if there are ties then it finds the lowest x value out of points_x[] index match in sorted_x
+	//sorted_points[0] is equivalent to Point A's index
+	sorted_points[0] = sorted_y[0];
+	for (int i = 1; i < 4; ++i) {
+
+		if (points_y[sorted_y[i]] < points_y[sorted_points[0]] ||
+			(points_y[sorted_y[i]] == points_y[sorted_points[0]] && points_x[sorted_y[i]] < points_x[sorted_points[0]])) {
+
+			sorted_points[0] = sorted_y[i];
+		}
+	}
 
 
 }
