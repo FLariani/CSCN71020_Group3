@@ -349,3 +349,12 @@ int pointIsInTri(int a[], int b[], int c[], int p[]) {
 	}
 
 }
+// takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
+float RectPerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
+	float sum=0;
+	sum += dOfPoints( &PointA, &PointB);
+	sum += dOfPoints(&PointB, &PointC);
+	sum += dOfPoints(&PointC, &PointD);
+	sum += dOfPoints(&PointD, &PointA);
+	return sum;
+}
