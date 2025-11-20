@@ -4,29 +4,29 @@
 
 #include "rectangleSolver.h"
 #include "triangleSolver.h"
-/*swaps the indexs of a value*/
+//swaps the indexs of a value
 void swapper(int i, int j, int Array[]) {
 	int hold = Array[j];
 	Array[j] = Array[i];
 	Array[i] = hold;
 }
-/*swap values at index logic from of the first array from smallest# to bigest#,
-if it's tied sort the ties by bigest# to smallest# of the second array - JW */
+//swap values at index logic from of the first array from smallest# to bigest#,
+//if it's tied sort the ties by bigest# to smallest# of the second array - JW 
 void sortLowToHigh(int arrayOne[], int arrayTwo[], int arraySize) {
 	for (int i = 0; i < arraySize; i++) {
 
-		/* j=i since we already made the first index the lowest we dont have to check again*/
+		// j=i since we already made the first index the lowest we dont have to check again
 		for (int j = i; j < arraySize; j++) {
 
-			/*if next index is bigger*/
+			//if next index is bigger
 			if (arrayOne[i] > arrayOne[j]) {
 
-				/*swap the position of x's is that index is smaller*/
+				//swap the position of x's is that index is smaller
 				swapper(i, j, arrayOne);
-				/*mirror the swap*/
+				//mirror the swap
 				swapper(i, j, arrayTwo);
 			}
-			/*if the next element checked is the same swap it base on if y is bigger*/
+			//if the next element checked is the same swap it base on if y is bigger
 			if (arrayOne[i] == arrayOne[j]) {
 				if (arrayTwo[i] > arrayTwo[j]) {
 					swapper(i, j, arrayOne);
@@ -47,7 +47,7 @@ void printArray(int array[], int size) {
 	}
 	//printf("\n");
 }
-//finds if three in a row in a sorted function*/
+//finds if three in a row in a sorted function
 int isThreeInRow(int array[]) {
 	//if the index 2 apart are the same the one between is also same since its sorted
 	if (array[0] == array[2] || array[1] == array[4]) {
@@ -358,8 +358,9 @@ float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 //ok the working ordering function for the 4 points outputs an indexes (a,b,c,d)
 // before that need to sort points lowest to highest y and x value
 
-void sort4PointsXY(int* points_x, int* points_y, int* sorted_x, int* sorted_y) {
+void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]) {
 
+	
 	//initializes original index order of points_x[] and points_y to be swapped
 	for (int i = 0; i < 4; i++) {
 
@@ -388,7 +389,7 @@ void sort4PointsXY(int* points_x, int* points_y, int* sorted_x, int* sorted_y) {
 	}
 }
 
-void sort4PointsCCW(int* points_x, int* points_y, int* sorted_points) {
+void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 
 	int sorted_x[4] = { -1,-1,-1,-1 };
 	int sorted_y[4] = { -1,-1,-1,-1 };

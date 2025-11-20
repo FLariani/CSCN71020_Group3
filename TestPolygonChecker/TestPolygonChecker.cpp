@@ -5,6 +5,8 @@
 extern "C" {
 	char* analyzeTriangle(int side1, int side2, int side3);
 	char* isRectangle(int points_X[], int points_Y[]);
+	void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]);
+	void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]);
 }
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -15,6 +17,7 @@ namespace TestPolygonChecker
 	{
 
 	public:
+		
 		// positive slope rectangle
 		TEST_METHOD(isRectangle_slantedRectangle_001)
 		{
@@ -41,13 +44,15 @@ namespace TestPolygonChecker
 			int points_Y[4] = { 3, 5, 0, 8 };
 			Assert::IsTrue(std::strcmp(isRectangle(points_X, points_Y), "Is a rectangle") == 0);
 		}
-		// example of two coordinates at the same point
+		// example of two coordinates at the same point *///HERE!!!!!!!
 		/* TEST_METHOD(rectangleSolver_slantedRectangle_005)
 		{
 			int points_X[4] = {13, 13, 17, 12};
 			int points_Y[4] = {25, 25, 19, 20};
 			Assert::IsTrue(isRectangle(points_X, points_Y) == 1);
 		} */
+
+		
 		TEST_METHOD(isRectangle_slantedRectangle_005)
 		{
 			int points_X[4] = { 15, 3, 13, 1 };
@@ -79,7 +84,7 @@ namespace TestPolygonChecker
 			int points_Y[4] = {0, 3, 12, 9};
 			Assert::IsTrue(std::strcmp(isRectangle(points_X, points_Y), "Is a rectangle") == 0);
 		}
-		// slots for two extra tests
+		// slots for two extra tests 
 		/* TEST_METHOD(rectangleSolver_slantedRectangle_009)
 		{
 			int points_X[4] = { 23, 32, 29, 20 };
@@ -108,6 +113,213 @@ namespace TestPolygonChecker
 			Assert::IsTrue(isRectangle(points_X, points_Y) == 0);
 		}
 		*/
+
+		
+		//ALL TEST METHODS PASSED FOR SORT4POINTSXY
+		TEST_METHOD(sort4PointsXY_001)
+		{
+			int points_x[4] = { 10, 20, 30, 40 };
+			int points_y[4] = { 40, 30, 20, 10 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 0, 1, 2, 3 };
+			int expected_sorted_y[4] = { 3, 2, 1, 0 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_002)
+		{
+			int points_x[4] = { 10, 20, 40, 30 };
+			int points_y[4] = { 40, 30, 10, 20 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 0, 1, 3, 2 };
+			int expected_sorted_y[4] = { 2, 3, 1, 0 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_003)
+		{
+			int points_x[4] = { 10, 30, 20, 40 };
+			int points_y[4] = { 40, 20, 30, 10 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 0, 2, 1, 3 };
+			int expected_sorted_y[4] = { 3, 1, 2, 0 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_004)
+		{
+			int points_x[4] = { 10, 30, 40, 20 };
+			int points_y[4] = { 40, 20, 10, 30 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 0, 3, 1, 2 };
+			int expected_sorted_y[4] = { 2, 1, 3, 0 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_005)
+		{
+			int points_x[4] = { 10, 40, 20, 30 };
+			int points_y[4] = { 40, 10, 30, 20 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 0, 2, 3, 1 };
+			int expected_sorted_y[4] = { 1, 3, 2, 0 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_006)
+		{
+			int points_x[4] = { 10, 40, 30, 20 };
+			int points_y[4] = { 40, 10, 20, 30 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 0, 3, 2, 1 };
+			int expected_sorted_y[4] = { 1, 2, 3, 0 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_007)
+		{
+			int points_x[4] = { 20, 10, 30, 40 };
+			int points_y[4] = { 30, 40, 20, 10 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 1, 0, 2, 3 };
+			int expected_sorted_y[4] = { 3, 2, 0, 1 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_008)
+		{
+			int points_x[4] = { 20, 10, 40, 30 };
+			int points_y[4] = { 30, 40, 10, 20 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 1, 0, 3, 2 };
+			int expected_sorted_y[4] = { 2, 3, 0, 1 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_009)
+		{
+			int points_x[4] = { 20, 30, 10, 40 };
+			int points_y[4] = { 30, 20, 40, 10 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 2, 0, 1, 3 };
+			int expected_sorted_y[4] = { 3, 1, 0, 2 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_010)
+		{
+			int points_x[4] = { 20, 30, 40, 10 };
+			int points_y[4] = { 30, 20, 10, 40 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 3, 0, 1, 2 };
+			int expected_sorted_y[4] = { 2, 1, 0, 3 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_011)
+		{
+			int points_x[4] = { 20, 40, 10, 30 };
+			int points_y[4] = { 30, 10, 40, 20 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 2, 0, 3, 1 };
+			int expected_sorted_y[4] = { 1, 3, 0, 2 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
+		TEST_METHOD(sort4PointsXY_012)
+		{
+			int points_x[4] = { 20, 40, 30, 10 };
+			int points_y[4] = { 30, 10, 20, 40 };
+			int sorted_x[4] = { -1, -1, -1, -1 };
+			int sorted_y[4] = { -1, -1, -1, -1 };
+			int expected_sorted_x[4] = { 3, 0, 2, 1 };
+			int expected_sorted_y[4] = { 1, 2, 0, 3 };
+			sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
+
+			for (int x = 0; x < 4; x++) {
+
+				Assert::AreEqual(expected_sorted_x[x], sorted_x[x]);
+				Assert::AreEqual(expected_sorted_y[x], sorted_y[x]);
+			}
+		}
+
 	}; 
 
 
