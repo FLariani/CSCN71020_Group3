@@ -358,7 +358,7 @@ float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 //ok the working ordering function for the 4 points outputs an indexes (a,b,c,d)
 // before that need to sort points lowest to highest y and x value
 
-void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]) {
+void sort4PointsXY(int* points_x, int* points_y, int* sorted_x, int* sorted_y) {
 
 	//initializes original index order of points_x[] and points_y to be swapped
 	for (int i = 0; i < 4; i++) {
@@ -388,7 +388,7 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 	}
 }
 
-void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
+void sort4PointsCCW(int* points_x, int* points_y, int* sorted_points) {
 
 	int sorted_x[4] = { -1,-1,-1,-1 };
 	int sorted_y[4] = { -1,-1,-1,-1 };
@@ -430,11 +430,13 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 
 		for (int i = 0; i < 4; i++) {
 
+			//skips used points_x and points_y index if used already in a sorted point
 			if (used_points[i]) {
 
 				continue;
 			}
 
+			//
 			if (next_point == -1) {
 
 				next_point = i;
@@ -448,14 +450,16 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[0]) {
 
 			double cross = dy1 * dx2 - dy2 * dx1;
 
+			//cross has negative values indicate that next_point is the next clockwise point compared to i
 			if (cross < 0) {
 
 				next_point = i;
 			}
 
+			//cross has a value of 0 when both i and next_point are colinear to point A (or sorted_points[0]
 			else if (cross == 0) {
 
-				// for collinear use sorted_x position as tie-break (closer to left)
+				// for collinear use sorted_x position as tie-break (lowest x-value)
 				if (position_sorted_x[i] < position_sorted_x[next_point]) {
 
 					next_point = i;
