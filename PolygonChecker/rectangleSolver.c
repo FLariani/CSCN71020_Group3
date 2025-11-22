@@ -323,7 +323,6 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 
 			nextPoint = sorted_points[0];
 		}
-
 		else {
 
 			nextPoint = sorted_points[x + 1];
@@ -333,7 +332,6 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 
 			prevPoint = sorted_points[3];
 		}
-
 		else {
 
 			prevPoint = sorted_points[x - 1];
