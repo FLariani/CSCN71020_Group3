@@ -141,7 +141,7 @@ float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 
 
 //ok the working ordering function for the 4 points outputs an indexes (a,b,c,d)
-// before that need to sort points lowest to highest y and x value
+// before that, need to sort points lowest to highest y and x value with sort4PointsXY
 
 void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]) {
 
@@ -307,7 +307,51 @@ char* isRectangle(int pointA[],int pointB[],int pointC[],int pointD[]) {
 
 	else {
 
-		return "Is not a rectangle";
+		return "Not a rectangle";
+	}
+}
+
+/* //or
+char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
+
+	for (int x = 0; x < 4; x++) {
+
+		int nextPoint;
+		int prevPoint;
+
+		if (x + 1 == 4) {
+
+			nextPoint = sorted_points[0];
+		}
+
+		else {
+
+			nextPoint = sorted_points[x + 1];
+		}
+
+		if (x - 1 == -1) {
+
+			prevPoint = sorted_points[3];
+		}
+
+		else {
+
+			prevPoint = sorted_points[x - 1];
+		}
+		
+		float nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
+		float nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
+		float prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
+		float prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
+
+		if (((nextDeltaX * prevDeltaX) + (nextDeltaY * prevDeltaY)) != 0) {
+
+			return "Not a rectangle";
+		}
 	}
 
+	return "Is a rectangle";
 }
+
+//its about the same amount of lines
+*/
