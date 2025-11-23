@@ -4,7 +4,7 @@
 #include <assert.h>
 extern "C" {
 	char* analyzeTriangle(int side1, int side2, int side3);
-	char* isRectangle(int points_X[], int points_Y[]);
+	char* isRectangle(int pointA[], int pointB[], int pointC[], int pointD[]);
 	void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]);
 	void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]);
 }
@@ -17,7 +17,8 @@ namespace TestPolygonChecker
 	{
 
 	public:
-		
+		//need to adjust these randomized points to go to sort4PointsXY() and sort4PointsCCW() -DW
+		// some variations will go to isRectangle with the expected sorted results in sorted_points[x] from sort4PointsCCW -DW
 		// positive slope rectangle
 		TEST_METHOD(isRectangle_slantedRectangle_001)
 		{
@@ -44,7 +45,7 @@ namespace TestPolygonChecker
 			int points_Y[4] = { 3, 5, 0, 8 };
 			Assert::IsTrue(std::strcmp(isRectangle(points_X, points_Y), "Is a rectangle") == 0);
 		}
-		// example of two coordinates at the same point *///HERE!!!!!!!
+		// example of two coordinates at the same point 
 		/* TEST_METHOD(rectangleSolver_slantedRectangle_005)
 		{
 			int points_X[4] = {13, 13, 17, 12};
@@ -115,7 +116,8 @@ namespace TestPolygonChecker
 		*/
 
 		
-		//ALL TEST METHODS PASSED FOR SORT4POINTSXY
+		//ALL TEST METHODS PASSED FOR SORT4POINTSXY -DW
+		//tests all combinations of sorting arrangements (total 24/2 for unique combinations for points_x and points_y) -DW
 		TEST_METHOD(sort4PointsXY_001)
 		{
 			int points_x[4] = { 10, 20, 30, 40 };

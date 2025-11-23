@@ -140,13 +140,11 @@ float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 
 
 
-//ok the working ordering function for the 4 points outputs an indexes (a,b,c,d)
-// before that, need to sort points lowest to highest y and x value with sort4PointsXY
-
+//ok the working ordering function for the 4 points outputs an indexes (a,b,c,d) -DW
+// before that, we need to sort points lowest to highest y and x value with sort4PointsXY -DW
 void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]) {
 
-	
-	//initializes original index order of points_x[] and points_y to be swapped
+	//initializes original index order of points_x[] and points_y to be swapped -DW
 	for (int i = 0; i < 4; i++) {
 
 		sorted_x[i] = i;
@@ -181,9 +179,9 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 
 	sort4PointsXY(points_x, points_y, sorted_x, sorted_y);
 
-	//sorted_points[0] is the lowest y value out of the whole points_y[] using the sorted_y index
-	//if there are ties then it finds the lowest x value out of points_x[] index match in sorted_x
-	//sorted_points[0] is equivalent to Point A's index
+	//sorted_points[0] is the lowest y value out of the whole points_y[] using the sorted_y index -DW
+	//if there are ties then it finds the lowest x value out of points_x[] index match in sorted_x -DW
+	//sorted_points[0] is equivalent to Point A's index -DW
 	sorted_points[0] = sorted_y[0];
 	for (int i = 1; i < 4; i++) {
 
@@ -194,18 +192,17 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 		}
 	}
 
-	//creates a boolean check for usable indexes
+	//creates a boolean check for usable indexes -DW
 	int used_points[4] = { 0,0,0,0 };
-
 
 	if (sorted_points[0] >= 0 && sorted_points[0] <= 3) {
 
 		used_points[sorted_points[0]] = 1;
 	}
 
-	//works as an index of sorted_x (output)
-	//the smaller value of an index, the smaller the x-value of that points_x's index
-	//the element index of position_sorted_x is the same as points_x translated into sorted_x's translation of points_x
+	//works as an index of sorted_x (output) -DW
+	//the smaller value of an index, the smaller the x-value of that points_x's index -DW
+	//the element index of position_sorted_x is the same as points_x translated into sorted_x's translation of points_x -DW
 	int position_sorted_x[4] = { -1,-1,-1,-1 };
 	for (int x = 0; x < 4; x++) {
 
@@ -215,22 +212,22 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 		}
 	}
 
-	//find sorted_points[1], [2], [3] by smallest angle
-	//angle is determined by dx and dy relative to sorted_points[0] or point A
-	//use sorted_x as a tie-breaker for cross==0
+	//find sorted_points[1], [2], [3] by smallest angle -DW
+	//angle is determined by dx and dy relative to sorted_points[0] or point A -DW
+	//use sorted_x as a tie-breaker for cross==0 -DW
 	for (int point_letter = 1; point_letter < 4; point_letter++) {
 
 		int next_point = -1;
 
 		for (int i = 0; i < 4; i++) {
 
-			//skips used points_x and points_y index if used already in a sorted point
+			//skips used points_x and points_y index if used already in a sorted point -DW
 			if (used_points[i]) {
 
 				continue;
 			}
 
-			//wad
+			//adds the first valid point available to be compared to a different valid point (continue) -DW
 			if (next_point == -1) {
 
 				next_point = i;
@@ -244,27 +241,26 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 
 			double cross = dy1 * dx2 - dy2 * dx1;
 
-			//cross has negative values indicate that next_point is the next clockwise point compared to i
+			//cross has negative values indicate that next_point is the next clockwise point compared to i -DW
 			if (cross < 0) {
 
 				next_point = i;
 			}
 
-			//cross has a value of 0 when both i and next_point are colinear to point A (or sorted_points[0]
+			//cross has a value of 0 when both i and next_point are colinear to point A (or sorted_points[0] -DW
 			else if (cross == 0) {
 
-				// for collinear use sorted_x position as tie-break (lowest x-value)
+				// for collinear use sorted_x position as tie-break (lowest x-value) -DW
 				if (position_sorted_x[i] < position_sorted_x[next_point]) {
 
 					next_point = i;
 				}
 			}
-			
 		}
-
+		//adds the next coordinate to the next sorted points -DW
+		//adds the next coordinate's index in points x and y to the used points -DW
 		sorted_points[point_letter] = next_point;
 		used_points[next_point] = 1;
-
 	}
 }
 
@@ -312,13 +308,17 @@ char* isRectangle(int pointA[],int pointB[],int pointC[],int pointD[]) {
 }
 
 /* //or
+* //probably use this one because it has the ability to work with duplicate coordinates -DW
 char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
-
+	
+	//each coordinate will be tested if dot product is 90 degrees
 	for (int x = 0; x < 4; x++) {
-
+	
+		//next and previous ordered point for dot product -DW
 		int nextPoint;
 		int prevPoint;
 
+		//if current coordinate is pointD then the next connected coordinate will be pointA -DW
 		if (x + 1 == 4) {
 
 			nextPoint = sorted_points[0];
@@ -328,6 +328,7 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 			nextPoint = sorted_points[x + 1];
 		}
 
+		//if current coordinate is pointA then the previous connected coordinate will be pointD -DW
 		if (x - 1 == -1) {
 
 			prevPoint = sorted_points[3];
@@ -337,19 +338,21 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 			prevPoint = sorted_points[x - 1];
 		}
 		
+		//finds the translation of x and y between the tested cooordinate and the next or previous coordinate -DW
 		float nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
 		float nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
 		float prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
 		float prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
 
-		if (((nextDeltaX * prevDeltaX) + (nextDeltaY * prevDeltaY)) != 0) {
+		//if dot product is not 0 then the angle is not 90 degrees -DW
+		//if the delta X and Y between the coordinate being tested and the next/previous coodinate is 0 then it is a duplicate coordinate -DW
+		if ((((nextDeltaX * prevDeltaX) + (nextDeltaY * prevDeltaY)) != 0)||
+		((nextDeltaX==0)&&(nextDeltaY==0))||((prevDeltaX==0)&&(prevDeltaY==0))) {
 
 			return "Not a rectangle";
 		}
 	}
-
 	return "Is a rectangle";
 }
-
 //its about the same amount of lines
 */
