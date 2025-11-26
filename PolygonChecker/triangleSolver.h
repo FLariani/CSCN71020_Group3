@@ -1,4 +1,4 @@
 #pragma once
 char* analyzeTriangle(int side1, int side2, int side3);
-float triArea(int a[], int b[], int c[]);
-void triAngles(int a[], int b[], int c[], float angles[]);
+float triArea(int side1, int side2, int side3);
+void triangleAngles(int side1, int side2, int side3, float angles[]);

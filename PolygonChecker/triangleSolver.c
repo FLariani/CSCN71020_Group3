@@ -30,7 +30,7 @@ char* analyzeTriangle(int side1, int side2, int side3) {
 
 //find  the area of a triangle given point abc
 // Find the area of a triangle given its 3 side lengths
-float triangleArea(int side1, int side2, int side3)
+float triArea(int side1, int side2, int side3)
 {
 	// If not a valid triangle, return -1 -FL
 	if (side1 <= 0 || side2 <= 0 || side3 <= 0)
@@ -61,19 +61,6 @@ float triangleArea(int side1, int side2, int side3)
 }
 
 
-float triArea(int a[], int b[], int c[]) {
-	float x1 = a[0], y1 = a[1];
-	float x2 = b[0], y2 = b[1];
-	float x3 = c[0], y3 = c[1];
-
-	float area = 0.5f * fabsf(
-		x1 * (y2 - y3) +
-		x2 * (y3 - y1) +
-		x3 * (y1 - y2)
-	);
-
-	return area;
-}
 
 
 // a, b, c are points {x, y} -FL
@@ -111,21 +98,7 @@ void triangleAngles(int side1, int side2, int side3, float angles[]) {
 }
 
 
-//check if point p is in triangle abc
-int pointIsInTri(int a[], int b[], int c[], int p[]) {
-	float mainTri = triArea(a, b, c);
-	float triNoA = triArea(p, b, c);
-	float triNoB = triArea(a, p, c);
-	float triNoC = triArea(a, b, p);
-	float sumTriNoabc = triNoA + triNoB + triNoC;
-	if (mainTri == sumTriNoabc) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
 
-}
 
 
 

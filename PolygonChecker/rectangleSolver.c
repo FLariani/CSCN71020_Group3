@@ -96,7 +96,7 @@ char* isRectangles(int pointA1, int pointA2, int pointB1, int pointB2, int point
 
 
 
-
+/*
 int findArrowCase(int arrayXs[], int arrayYs[]) {
 	int pointA[2];
 	int pointB[2];
@@ -129,6 +129,7 @@ float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
 	sum += dOfPoints(&PointD, &PointA);
 	return sum;
 }
+
 //area
 float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 	float Area = 0;
@@ -138,7 +139,7 @@ float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
 	return Area;
 }
 
-
+*/
 
 //ok the working ordering function for the 4 points outputs an indexes (a,b,c,d) -DW
 // before that, we need to sort points lowest to highest y and x value with sort4PointsXY -DW
@@ -283,7 +284,7 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 		used_points[next_point] = 1;
 	}
 }
-
+/*
 char* isRectangle(int pointA[],int pointB[],int pointC[],int pointD[]) {
 
 	//we can make a function to do some of this stuff
@@ -326,7 +327,7 @@ char* isRectangle(int pointA[],int pointB[],int pointC[],int pointD[]) {
 		return "Not a rectangle";
 	}
 }
-
+*/
  //or
  //probably use this one because it has the ability to work with duplicate coordinates -DW
 char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
