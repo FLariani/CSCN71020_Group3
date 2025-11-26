@@ -205,10 +205,13 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 	//the smaller value of an index, the smaller the y-value of that points_y's index -DW
 	//the element index of position_sorted_y is the same as points_y translated into sorted_y's translation of points_x -DW
 	int position_sorted_y[4] = { -1,-1,-1,-1 };
+	int position_sorted_x[4] = { -1,-1,-1,-1 };
 	for (int x = 0; x < 4; x++) {
 
 		if (sorted_points[x] >= 0 && sorted_points[x] <= 3) {
 
+
+			position_sorted_x[sorted_x[x]] = x;
 			position_sorted_y[sorted_y[x]] = x;
 		}
 	}
@@ -259,7 +262,13 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 						next_point = i;
 					}
 				}
+				else if (points_y[i] == points_y[next_point]) {
 
+					if (position_sorted_x[i] < position_sorted_x[next_point]) {
+
+						next_point = i;
+					}
+				}
 				// for collinear use sorted_x position as tie-break (lowest y-value) -DW
 				else if (position_sorted_y[i] < position_sorted_y[next_point]) {
 
