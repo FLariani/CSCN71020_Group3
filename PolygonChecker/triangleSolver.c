@@ -4,26 +4,61 @@
 #include "triangleSolver.h"
 
 char* analyzeTriangle(int side1, int side2, int side3) {
-	char* result = "";
-	if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
-		result = "Not a triangle";
-	}
-	else if (side1 == side2 && side1 == side3) {
-		result = "Equilateral triangle";
-	}
-	else if ((side1 == side2 && side1 != side3) || 
-		(side1 == side3 && side1 != side2))
-	{
-		result = "Isosceles triangle";
-	}
-	else {
-		result = "Scalene triangle";
-	}
 
-	return result;
+	// 1. Invalid sides -FL
+	if (side1 <= 0 || side2 <= 0 || side3 <= 0)
+		return "Not a triangle";
+
+	// 2. Triangle inequality test -FL
+	if (side1 + side2 <= side3 ||
+		side1 + side3 <= side2 ||
+		side2 + side3 <= side1)
+		return "Not a triangle";
+
+	// 3. All sides equal -FL
+	if (side1 == side2 && side2 == side3)
+		return "Equilateral triangle";
+
+	// 4. Exactly two sides equal -FL
+	if (side1 == side2 || side1 == side3 || side2 == side3)
+		return "Isosceles triangle";
+
+	// 5. All sides different -FL
+	return "Scalene triangle";
 }
 
+
 //find  the area of a triangle given point abc
+// Find the area of a triangle given its 3 side lengths
+float triangleArea(int side1, int side2, int side3)
+{
+	// If not a valid triangle, return -1 -FL
+	if (side1 <= 0 || side2 <= 0 || side3 <= 0)
+		return -1;
+
+	// Triangle inequality check -FL
+	if (side1 + side2 <= side3 ||
+		side1 + side3 <= side2 ||
+		side2 + side3 <= side1)
+		return -1;
+
+	// Convert to float for safety -FL
+	float a = (float)side1;
+	float b = (float)side2;
+	float c = (float)side3;
+
+	// Heron's formula -FL
+	float s = (a + b + c) / 2.0f;           // semi-perimeter (following the formula) -Fl
+	float areaSquared = s * (s - a) * (s - b) * (s - c);
+
+	if (areaSquared <= 0)
+		return -1;
+
+	// square root -FL
+	float area = sqrtf(areaSquared);
+
+	return area;
+}
 
 
 float triArea(int a[], int b[], int c[]) {
@@ -46,21 +81,27 @@ float triArea(int a[], int b[], int c[]) {
 // angles[1] = angle at point B -FL
 // angles[2] = angle at point C -FL
 
-void triAngles(int a[], int b[], int c[], float angles[]) {
-	// Side lengths using distance formula -FL
-	float ab = sqrtf((b[0] - a[0]) * (b[0] - a[0]) +
-		(b[1] - a[1]) * (b[1] - a[1]));
+void triangleAngles(int side1, int side2, int side3, float angles[]) {
 
-	float bc = sqrtf((c[0] - b[0]) * (c[0] - b[0]) +
-		(c[1] - b[1]) * (c[1] - b[1]));
+	// Validate sides -FL
+	if (side1 <= 0 || side2 <= 0 || side3 <= 0 ||
+		side1 + side2 <= side3 ||
+		side1 + side3 <= side2 ||
+		side2 + side3 <= side1)
+	{
+		angles[0] = angles[1] = angles[2] = -1.0f;
+		return;
+	}
 
-	float ca = sqrtf((a[0] - c[0]) * (a[0] - c[0]) +
-		(a[1] - c[1]) * (a[1] - c[1]));
+	// Convert to float for safety -FL
+	float a = (float)side1;
+	float b = (float)side2;
+	float c = (float)side3;
 
-	// Law of Cosines for each angle -FL
-	float A = acosf((ab * ab + ca * ca - bc * bc) / (2 * ab * ca));
-	float B = acosf((ab * ab + bc * bc - ca * ca) / (2 * ab * bc));
-	float C = acosf((bc * bc + ca * ca - ab * ab) / (2 * bc * ca));
+	// Law of Cosines -Fl
+	float A = acosf((b * b + c * c - a * a) / (2 * b * c));
+	float B = acosf((a * a + c * c - b * b) / (2 * a * c));
+	float C = acosf((a * a + b * b - c * c) / (2 * a * b));
 
 	// Convert radians to degrees -FL
 	const float PI = 3.1415926535f;
