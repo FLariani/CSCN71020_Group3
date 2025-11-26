@@ -186,7 +186,8 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 	for (int i = 1; i < 4; i++) {
 
 		if (points_y[sorted_y[i]] < points_y[sorted_points[0]] ||
-			(points_y[sorted_y[i]] == points_y[sorted_points[0]] && points_x[sorted_y[i]] < points_x[sorted_points[0]])) {
+			(points_y[sorted_y[i]] == points_y[sorted_points[0]] &&
+			 points_x[sorted_y[i]] < points_x[sorted_points[0]])) {
 
 			sorted_points[0]= sorted_y[i];
 		}
@@ -201,17 +202,18 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 	}
 
 	//works as an index of sorted_x (output) -DW
-	//the smaller value of an index, the smaller the x-value of that points_x's index -DW
-	//the element index of position_sorted_x is the same as points_x translated into sorted_x's translation of points_x -DW
-	int position_sorted_x[4] = { -1,-1,-1,-1 };
+	//the smaller value of an index, the smaller the y-value of that points_y's index -DW
+	//the element index of position_sorted_y is the same as points_y translated into sorted_y's translation of points_x -DW
+	int position_sorted_y[4] = { -1,-1,-1,-1 };
 	for (int x = 0; x < 4; x++) {
 
 		if (sorted_points[x] >= 0 && sorted_points[x] <= 3) {
 
-			position_sorted_x[sorted_x[x]] = x;
+			position_sorted_y[sorted_y[x]] = x;
 		}
 	}
-
+	//used to determine the 3 collinear points
+	int flag = -1;
 	//find sorted_points[1], [2], [3] by smallest angle -DW
 	//angle is determined by dx and dy relative to sorted_points[0] or point A -DW
 	//use sorted_x as a tie-breaker for cross==0 -DW
@@ -234,12 +236,12 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 				continue;
 			}
 
-			double dx1 = (double)points_x[i] - points_x[sorted_points[0]];
-			double dy1 = (double)points_y[i] - points_y[sorted_points[0]];
-			double dx2 = (double)points_x[next_point] - points_x[sorted_points[0]];
-			double dy2 = (double)points_y[next_point] - points_y[sorted_points[0]];
+			long dx1 = points_x[i] - points_x[sorted_points[0]];
+			long dy1 = points_y[i] - points_y[sorted_points[0]];
+			long dx2 = points_x[next_point] - points_x[sorted_points[0]];
+			long dy2 = points_y[next_point] - points_y[sorted_points[0]];
 
-			double cross = dy1 * dx2 - dy2 * dx1;
+			long cross = dy1 * dx2 - dy2 * dx1;
 
 			//cross has negative values indicate that next_point is the next clockwise point compared to i -DW
 			if (cross < 0) {
@@ -250,11 +252,20 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 			//cross has a value of 0 when both i and next_point are colinear to point A (or sorted_points[0] -DW
 			else if (cross == 0) {
 
-				// for collinear use sorted_x position as tie-break (lowest x-value) -DW
-				if (position_sorted_x[i] < position_sorted_x[next_point]) {
+				if (point_letter == 2 && flag != sorted_points[1]) {
+					
+					if (position_sorted_y[i] > position_sorted_y[next_point]) {
+
+						next_point = i;
+					}
+				}
+
+				// for collinear use sorted_x position as tie-break (lowest y-value) -DW
+				else if (position_sorted_y[i] < position_sorted_y[next_point]) {
 
 					next_point = i;
 				}
+				flag = next_point;
 			}
 		}
 		//adds the next coordinate to the next sorted points -DW
@@ -339,10 +350,10 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 		}
 		
 		//finds the translation of x and y between the tested cooordinate and the next or previous coordinate -DW
-		float nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
-		float nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
-		float prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
-		float prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
+		long long nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
+		long long nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
+		long long prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
+		long long prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
 
 		//if dot product is not 0 then the angle is not 90 degrees -DW
 		//if the delta X and Y between the coordinate being tested and the next/previous coodinate is 0 then it is a duplicate coordinate -DW
