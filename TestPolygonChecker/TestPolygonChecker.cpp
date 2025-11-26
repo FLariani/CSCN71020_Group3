@@ -16,7 +16,7 @@ extern "C" {
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TestRectangle {
-	TEST_CLASS(rectangleSolver)
+	TEST_CLASS(DeleteThis)
 	{
 
 	public:
@@ -329,7 +329,31 @@ public:
 		}
 	}
 	};
+	TEST_CLASS(SortedPointsCW) {
+
+
+public:
+
 	};
+	TEST_CLASS(IsRectangle) {
+
+
+public:
+
+	};
+	TEST_CLASS(RectanglePerimeter) {
+
+
+public:
+
+	};
+	TEST_CLASS(RectangleArea) {
+
+
+public:
+
+	};
+};
 	
 	
 		
