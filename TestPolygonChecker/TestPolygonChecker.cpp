@@ -374,6 +374,131 @@ public:
 			Assert::AreEqual(expected[x], sorted_points[x]);
 		}
 	}
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_001)
+	{
+		int points_X[4] = { 15, 3, 16, 2 };
+		int points_Y[4] = { 19, 5, 6, 18 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 2, 0, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_002)
+	{
+		int points_X[4] = { 19, 10, 11, 18 };
+		int points_Y[4] = { 3, 10, 2, 11 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 0, 3, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_003)
+	{
+		int points_X[4] = { 7, 9, 3, 15 };
+		int points_Y[4] = { 9, 14, 13, 12 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 3, 1, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_004)
+	{
+		int points_X[4] = { 23, 15, 18, 20 };
+		int points_Y[4] = { 3, 5, 0, 8 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 0, 3, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_005)
+	{
+		int points_X[4] = { 15, 3, 16, 1 };
+		int points_Y[4] = { 2, 0, 11, 12 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 2, 3, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_006)
+	{
+		int points_X[4] = { 9, 20, 15, 13 };
+		int points_Y[4] = { 11, 3, 14, 0 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 1, 2, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_007)
+	{
+		int points_X[4] = { 9, 13, 15, 19 };
+		int points_Y[4] = { 3, 0, 11, 8 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 3, 2, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_008)
+	{
+		int points_X[4] = { 38, 20, 35, 23 };
+		int points_Y[4] = { 5, 9, 14, 0 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 0, 2, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+	TEST_METHOD(sort4PointsCCW_SlantedRectangle_009)
+	{
+		int points_X[4] = { 15, 10, 5, 10 };
+		int points_Y[4] = { 5, 0, 5, 10};
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 0, 3, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
 
 
 
