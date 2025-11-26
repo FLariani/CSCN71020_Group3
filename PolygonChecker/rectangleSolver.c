@@ -307,8 +307,8 @@ char* isRectangle(int pointA[],int pointB[],int pointC[],int pointD[]) {
 	}
 }
 
-/* //or
-* //probably use this one because it has the ability to work with duplicate coordinates -DW
+ //or
+ //probably use this one because it has the ability to work with duplicate coordinates -DW
 char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 	
 	//each coordinate will be tested if dot product is 90 degrees
@@ -355,4 +355,3 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 	return "Is a rectangle";
 }
 //its about the same amount of lines
-*/
