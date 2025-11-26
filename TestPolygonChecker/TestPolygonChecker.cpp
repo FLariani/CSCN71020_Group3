@@ -498,6 +498,189 @@ public:
 			Assert::AreEqual(expected[x], sorted_points[x]);
 		}
 	}
+	TEST_METHOD(sort4PointsCCW_4DifferentPoints_Lines_001)
+	{
+		int points_X[4] = { 20, 15, 25, 10 };
+		int points_Y[4] = { 15, 10, 20, 5 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 1, 0, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_4DifferentPoints_Lines_002)
+	{
+		int points_X[4] = { 20, 20, 20, 20 };
+		int points_Y[4] = { 15, 10, 25, 20 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 0, 3, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_4DifferentPoints_Lines_003)
+	{
+		int points_X[4] = { 25, 15, 10, 20 };
+		int points_Y[4] = { 10, 20, 25, 15 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 3, 1, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_4DifferentPoints_Lines_004)
+	{
+		int points_X[4] = { 15, 20, 5, 10 };
+		int points_Y[4] = { 20, 20, 20, 20 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+
+	TEST_METHOD(sort4PointsCCW_2DifferentPoints_Lines_001)
+	{
+		int points_X[4] = { 25, 10, 25, 10 };
+		int points_Y[4] = { 20, 5, 20, 5 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 3, 0, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_2DifferentPoints_Lines_002)
+	{
+		int points_X[4] = { 20, 20, 20, 20 };
+		int points_Y[4] = { 25, 10, 10, 25 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 2, 0, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_2DifferentPoints_Lines_003)
+	{
+		int points_X[4] = { 10, 25, 25, 10 };
+		int points_Y[4] = { 25, 10, 10, 25 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 3, 1, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_2DifferentPoints_Lines_004)
+	{
+		int points_X[4] = { 20, 20, 5, 5 };
+		int points_Y[4] = { 20, 20, 20, 20 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_TriangleDegenerate_001)
+	{
+		int points_X[4] = { 20, 15, 10, 30 };
+		int points_Y[4] = { 15, 10, 5, 7 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_TriangleDegenerate_002)
+	{
+		int points_X[4] = { 20, 15, 10, 5 };
+		int points_Y[4] = { 15, 10, 5, 50 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 1, 0, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_TriangleDegenerate_003)
+	{
+		int points_X[4] = { 15, 10, 25, 17 };
+		int points_Y[4] = { 20, 25, 10, 30 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 1, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_TriangleDegenerate_004)
+	{
+		int points_X[4] = { 15, 10, 25, 17 };
+		int points_Y[4] = { 20, 25, 10, 12 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 0, 1, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_4SamePoints_001)
+	{
+		int points_X[4] = { 24, 24, 24, 24 };
+		int points_Y[4] = { 14, 14, 14, 14 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 1, 2, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
 
 
 
