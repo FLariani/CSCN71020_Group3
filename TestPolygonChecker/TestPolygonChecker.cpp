@@ -121,7 +121,7 @@ namespace TestRectangle {
 	};
 	//ALL TEST METHODS PASSED FOR SORT4POINTSXY -DW
 	//tests all combinations of sorting arrangements (total 24/2 for unique combinations for points_x and points_y) -DW
-	TEST_CLASS(SortedPoints) {
+	TEST_CLASS(SortedPointsXY) {
 
 
 public:
@@ -333,6 +333,49 @@ public:
 
 
 public:
+	TEST_METHOD(sort4PointsCCW_AxisAlignedRectangle_001)
+	{
+		int points_X[4] = { 6, 22, 22, 6 };
+		int points_Y[4] = { 16, 20, 16, 20 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 0, 2, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_AxisAlignedRectangle_002)
+	{
+		int points_X[4] = { 46, 40, 40, 46 };
+		int points_Y[4] = { 6, 16, 6, 16 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 0, 2, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_AxisAlignedRectangle_003)
+	{
+		int points_X[4] = { 12, 6, 12, 6 };
+		int points_Y[4] = { 2, 2, 8, 8 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 0, 2, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+
 
 	};
 	TEST_CLASS(IsRectangle) {
