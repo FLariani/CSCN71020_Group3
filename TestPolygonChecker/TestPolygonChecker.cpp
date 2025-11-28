@@ -1238,6 +1238,109 @@ public:
 
 public:
 
+	TEST_METHOD(isRectangle_AxisAlignedRectangle_001)
+	{
+		int points_X[4] = { 6, 22, 22, 6 };
+		int points_Y[4] = { 16, 20, 16, 20 };
+		int sorted_points[4] = { 0, 2, 1, 3 };
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::IsTrue(strcmp(isRectangle(points_X, points_Y,
+		}
+	}
+
+	TEST_METHOD(isRectangle_AxisAlignedRectangle_002)
+	{
+		int points_X[4] = { 46, 40, 40, 46 };
+		int points_Y[4] = { 6, 16, 6, 16 };
+		int sorted_points[4] = { 2, 0, 3, 1 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_AxisAlignedRectangle_003)
+	{
+		int points_X[4] = { 12, 6, 12, 6 };
+		int points_Y[4] = { 2, 2, 8, 8 };
+		int sorted_points[4] = { 1, 0, 2, 3 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_001)
+	{
+		int points_X[4] = { 15, 3, 16, 2 };
+		int points_Y[4] = { 19, 5, 6, 18 };
+		int sorted_points[4] = { 1, 2, 0, 3 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_002)
+	{
+		int points_X[4] = { 19, 10, 11, 18 };
+		int points_Y[4] = { 3, 10, 2, 11 };
+		int sorted_points[4] = { 2, 0, 3, 1 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_003)
+	{
+		int points_X[4] = { 7, 10, 2, 15 };
+		int points_Y[4] = { 9, 22, 14, 17 };
+		int sorted_points[4] = { 0, 3, 1, 2 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_004)
+	{
+		int points_X[4] = { 23, 15, 18, 20 };
+		int points_Y[4] = { 3, 5, 0, 8 };
+		int sorted_points[4] = { 2, 0, 3, 1 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_005)
+	{
+		int points_X[4] = { 7, 20, 14, 13 };
+		int points_Y[4] = { 14, 3, 17, 0 };
+		int sorted_points[4] = { 3, 1, 2, 0 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_006)
+	{
+		int points_X[4] = { 9, 13, 15, 19 };
+		int points_Y[4] = { 3, 0, 11, 8 };
+		int sorted_points[4] = { 1, 3, 2, 0 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_007)
+	{
+		int points_X[4] = { 38, 20, 35, 23 };
+		int points_Y[4] = { 5, 9, 14, 0 };
+		int sorted_points[4] = { 3, 0, 2, 1 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_SlantedRectangle_008)
+	{
+		int points_X[4] = { 15, 10, 5, 10 };
+		int points_Y[4] = { 5, 0, 5, 10 };
+		int sorted_points[4] = { 1, 0, 3, 2 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+	}
+
+
 
 
 	};
