@@ -1340,6 +1340,61 @@ public:
 		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
 	}
 
+	TEST_METHOD(isRectangle_4DifferentPoints_Lines_001)
+	{
+		int points_X[4] = { 20, 15, 25, 10 };
+		int points_Y[4] = { 15, 10, 20, 5 };
+		int sorted_points[4] = { 3, 1, 0, 2 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_4DifferentPoints_Lines_002)
+	{
+		int points_X[4] = { 20, 20, 20, 20 };
+		int points_Y[4] = { 15, 10, 25, 20 };
+		int sorted_points[4] = { 1, 0, 3, 2 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_2DifferentPoints_Lines_001)
+	{
+		int points_X[4] = { 25, 10, 25, 10 };
+		int points_Y[4] = { 20, 5, 20, 5 };
+		int sorted_points[4] = { 1, 3, 0, 2 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_2DifferentPoints_Lines_002)
+	{
+		int points_X[4] = { 20, 20, 5, 5 };
+		int points_Y[4] = { 20, 20, 20, 20 };
+		int sorted_points[4] = { 2, 3, 0, 1 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+
+	TEST_METHOD(isRectangle_TriangleDegenerate_001)
+	{
+		int points_X[4] = { 20, 15, 10, 30 };
+		int points_Y[4] = { 15, 10, 5, 7 };
+		int sorted_points[4] = { 2, 3, 0, 1 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_TriangleDegenerate_002)
+	{
+		int points_X[4] = { 20, 15, 10, 5 };
+		int points_Y[4] = { 15, 10, 5, 50 };
+		int sorted_points[4] = { 2, 1, 0, 3 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
 
 
 
