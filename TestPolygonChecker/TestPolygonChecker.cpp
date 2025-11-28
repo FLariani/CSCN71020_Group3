@@ -892,87 +892,270 @@ public:
 			Assert::AreEqual(expected[x], sorted_points[x]);
 		}
 	}
-	TEST_METHOD(isRectangle_Trapezium_001)
+	TEST_METHOD(sort4PointsCCW_Trapezium_001)
 	{
 		int points_X[4] = { 35, 15, 25, 35 };
 		int points_Y[4] = { 20, 5, 20, 10 };
-		int sorted_points[4] = { 1, 3, 0, 2 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 3, 0, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
-	TEST_METHOD(isRectangle_Trapezium_002)
+	TEST_METHOD(sort4PointsCCW_Trapezium_002)
 	{
 		int points_X[4] = { 15, 15, 0, 5 };
 		int points_Y[4] = { 0, 5, 0, 5 };
-		int sorted_points[4] = { 2, 0, 1, 3 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 0, 1, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
-	TEST_METHOD(isRectangle_IsocelesTrapezium_001)
+	TEST_METHOD(sort4PointsCCW_Trapezium_003)
+	{
+		int points_X[4] = { 5, 5, 10, 10 };
+		int points_Y[4] = { 15, 0, 0, 10 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 2, 0, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Trapezium_004)
+	{
+		int points_X[4] = { 20, 5, 5, 15 };
+		int points_Y[4] = { 10, 10, 5, 5 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Trapezium_005)
+	{
+		int points_X[4] = { 5, 20, 20, 10 };
+		int points_Y[4] = { 5, 20, 10, 0 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 2, 1, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Trapezium_006)
+	{
+		int points_X[4] = { 15, 10, 15, 10 };
+		int points_Y[4] = { 5, 20, 20, 10 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 2, 1, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+
+
+	//real one
+	TEST_METHOD(sort4PointsCCW_Trapezium_007)
+	{
+		int points_X[4] = { 25, 10, 20, 10 };
+		int points_Y[4] = { 20, 5, 25, 15 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 0, 2, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Trapezium_008)
+	{
+		int points_X[4] = { 15, 10, 20, 30 };
+		int points_Y[4] = { 20, 15, 5, 5 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Trapezium_009)
+	{
+		int points_X[4] = { 15, 0, 20, 10 };
+		int points_Y[4] = { 5, 20, 10, 20 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 2, 3, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_001)
 	{
 		int points_X[4] = { 25, 10, 15, 10 };
 		int points_Y[4] = { 20, 5, 20, 15 };
-		int sorted_points[4] = { 1, 0, 2, 3 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 0, 2, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
-	TEST_METHOD(isRectangle_IsocelesTrapezium_002)
+	//real one
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_002)
 	{
 		int points_X[4] = { 3, 6, 1, 7 };
 		int points_Y[4] = { 4, 3, 3, 1 };
-		int sorted_points[4] = { 3, 1, 0, 2 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 1, 0, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
-	TEST_METHOD(isRectangle_IrregularParallelogram_001)
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_003)
 	{
-		int points_X[4] = { 10, 20, 15, 11 };
-		int points_Y[4] = { 10, 15, 5, 14 };
-		int sorted_points[4] = { 2, 1, 3, 0 };
+		int points_X[4] = { 3, 3, 5, 5 };
+		int points_Y[4] = { 5, 2, 1, 6 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
-	TEST_METHOD(isRectangle_IrregularParallelogram_002)
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_004)
 	{
-		int points_X[4] = { 3, 6, 2, 7 };
-		int points_Y[4] = { 4, 3, 2, 2 };
-		int sorted_points[4] = { 2, 3, 1, 0 };
+		int points_X[4] = { 14, 16, 14, 16 };
+		int points_Y[4] = { 5, 6, 10, 9 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 1, 3, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
-	TEST_METHOD(isRectangle_Concave_001)
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_005)
 	{
-		int points_X[4] = { 4, 5, 7, 8 };
-		int points_Y[4] = { 10, 9, 9, 4 };
-		int sorted_points[4] = { 3, 2, 1, 0 };
+		int points_X[4] = { 5, 7, 9, 9 };
+		int points_Y[4] = { 9, 9, 5, 7 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 1, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
-	TEST_METHOD(isRectangle_Concave_002)
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_006)
 	{
-		int points_X[4] = { 9, 12, 11, 8 };
-		int points_Y[4] = { 7, 12, 11, 12 };
-		int sorted_points[4] = { 0, 2, 3, 1 };
+		int points_X[4] = { 11, 15, 15, 13 };
+		int points_Y[4] = { 5, 7, 9, 5 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 3, 1, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
 	}
 
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_007)
+	{
+		int points_X[4] = { 4, 6, 4, 8 };
+		int points_Y[4] = { 11, 7, 9, 7 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 3, 0, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
 
+		for (int x = 0; x < 4; x++) {
 
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
 
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_008)
+	{
+		int points_X[4] = { 9, 4, 5, 8 };
+		int points_Y[4] = { 7, 7, 5, 5 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_009)
+	{
+		int points_X[4] = { 10, 8, 8, 12 };
+		int points_Y[4] = { 10, 8, 6, 10 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
 
 	};
+
 	TEST_CLASS(IsRectangle) {
 
 
 public:
+
+
 
 	};
 	TEST_CLASS(RectanglePerimeter) {
