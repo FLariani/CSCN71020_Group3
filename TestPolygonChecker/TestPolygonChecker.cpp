@@ -641,8 +641,8 @@ public:
 		}
 	}
 
-		TEST_METHOD(sort4PointsCCW_TriangleDegenerate_004)
-	{
+	TEST_METHOD(sort4PointsCCW_TriangleDegenerate_004)
+{
 		int points_X[4] = { 15, 10, 25, 17 };
 		int points_Y[4] = { 20, 25, 10, 12 };
 		int sorted_points[4] = { -1, -1, -1, -1 };
@@ -661,6 +661,230 @@ public:
 		int points_Y[4] = { 14, 14, 14, 14 };
 		int sorted_points[4] = { -1, -1, -1, -1 };
 		int expected[4] = { 0, 1, 2, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Parallelogram_001)
+	{
+		int points_X[4] = { 0, 15, 20, 5 };
+		int points_Y[4] = { 0, 0, 10, 10 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 1, 2, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Parallelogram_002)
+	{
+		int points_X[4] = { 6, 6, 14, 14 };
+		int points_Y[4] = { 6, 16, 12, 22 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 2, 3, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Parallelogram_003)
+	{
+		int points_X[4] = { 8, 12, 16, 12 };
+		int points_Y[4] = { 14, 22, 14, 6 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 2, 1, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Parallelogram_004)
+	{
+		int points_X[4] = { 10, 10, 16, 16 };
+		int points_Y[4] = { 22, 14, 16, 8 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 2, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Parallelogram_005)
+	{
+		int points_X[4] = { 20, 28, 26, 34 };
+		int points_Y[4] = { 10, 10, 4, 4 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 1, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Parallelogram_006)
+	{
+		int points_X[4] = { 14, 22, 30, 22 };
+		int points_Y[4] = { 14, 10, 14, 18 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 2, 3, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_001)
+	{
+		int points_X[4] = { 19, 16, 16, 15 };
+		int points_Y[4] = { 10, 9, 11, 10 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 0, 2, 3 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_002)
+	{
+		int points_X[4] = { 13, 25, 16, 16 };
+		int points_Y[4] = { 10, 10, 13, 7 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 1, 2, 0 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_003)
+	{
+		int points_X[4] = { 20, 15, 25, 20 };
+		int points_Y[4] = { 15, 10, 10, 0 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 2, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_004)
+	{
+		int points_X[4] = { 25, 20, 10, 10 };
+		int points_Y[4] = { 0, 15, 5, 15 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 1, 3, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_005)
+	{
+		int points_X[4] = { 15, 10, 5, 10 };
+		int points_Y[4] = { 5, 0, 5, 15 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = {  };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_005)
+	{
+		int points_X[4] = { 15, 10, 5, 10 };
+		int points_Y[4] = { 5, 0, 5, 15 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 0, 3, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_006)
+	{
+		int points_X[4] = { 35, 20, 25, 35 };
+		int points_Y[4] = { 20, 5, 20, 10 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 1, 3, 0, 2 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_007)
+	{
+		int points_X[4] = { 30, 0, 30, 40 };
+		int points_Y[4] = { 20, 10, 0, 10 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 2, 3, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_008)
+	{
+		int points_X[4] = { 30, 10, 30, 20 };
+		int points_Y[4] = { 10, 20, 0, 0 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 3, 2, 0, 1 };
+		sort4PointsCCW(points_X, points_Y, sorted_points);
+
+		for (int x = 0; x < 4; x++) {
+
+			Assert::AreEqual(expected[x], sorted_points[x]);
+		}
+	}
+
+	TEST_METHOD(sort4PointsCCW_Kite_009)
+	{
+		int points_X[4] = { 15, 10, 7, 19 };
+		int points_Y[4] = { 5, 15, 7, 14 };
+		int sorted_points[4] = { -1, -1, -1, -1 };
+		int expected[4] = { 0, 3, 1, 2 };
 		sort4PointsCCW(points_X, points_Y, sorted_points);
 
 		for (int x = 0; x < 4; x++) {
