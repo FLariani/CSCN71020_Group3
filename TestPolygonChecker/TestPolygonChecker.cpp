@@ -892,6 +892,59 @@ public:
 			Assert::AreEqual(expected[x], sorted_points[x]);
 		}
 	}
+	TEST_METHOD(isRectangle_Trapezium_001)
+	{
+		int points_X[4] = { 35, 15, 25, 35 };
+		int points_Y[4] = { 20, 5, 20, 10 };
+		int sorted_points[4] = { 1, 3, 0, 2 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_Trapezium_002)
+	{
+		int points_X[4] = { 15, 15, 0, 5 };
+		int points_Y[4] = { 0, 5, 0, 5 };
+		int sorted_points[4] = { 2, 0, 1, 3 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_IsocelesTrapezium_001)
+	{
+		int points_X[4] = { 25, 10, 15, 10 };
+		int points_Y[4] = { 20, 5, 20, 15 };
+		int sorted_points[4] = { 1, 0, 2, 3 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_IsocelesTrapezium_002)
+	{
+		int points_X[4] = { 3, 6, 1, 7 };
+		int points_Y[4] = { 4, 3, 3, 1 };
+		int sorted_points[4] = { 3, 1, 0, 2 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_IrregularParallelogram_001)
+	{
+		int points_X[4] = { 10, 20, 15, 11 };
+		int points_Y[4] = { 10, 15, 5, 14 };
+		int sorted_points[4] = { 2, 1, 3, 0 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_IrregularParallelogram_002)
+	{
+		int points_X[4] = { 3, 6, 2, 7 };
+		int points_Y[4] = { 4, 3, 2, 2 };
+		int sorted_points[4] = { 2, 3, 1, 0 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
 
 
 
