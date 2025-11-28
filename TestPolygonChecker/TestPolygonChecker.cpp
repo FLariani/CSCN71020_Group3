@@ -1474,6 +1474,41 @@ public:
 
 		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
 	}
+	TEST_METHOD(isRectangle_IrregularParallelogram_001)
+	{
+		int points_X[4] = { 10, 20, 15, 11 };
+		int points_Y[4] = { 10, 15, 5, 14 };
+		int sorted_points[4] = { 2, 1, 3, 0 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_IrregularParallelogram_002)
+	{
+		int points_X[4] = { 3, 6, 2, 7 };
+		int points_Y[4] = { 4, 3, 2, 2 };
+		int sorted_points[4] = { 2, 3, 1, 0 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_Concave_001)
+	{
+		int points_X[4] = { 4, 5, 7, 8 };
+		int points_Y[4] = { 10, 9, 9, 4 };
+		int sorted_points[4] = { 3, 2, 1, 0 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
+
+	TEST_METHOD(isRectangle_Concave_002)
+	{
+		int points_X[4] = { 9, 12, 11, 8 };
+		int points_Y[4] = { 7, 12, 11, 12 };
+		int sorted_points[4] = { 0, 2, 3, 1 };
+
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+	}
 
 
 
