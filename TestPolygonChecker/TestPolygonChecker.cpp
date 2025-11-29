@@ -1904,6 +1904,138 @@ public:
 
 public:
 
+	TEST_METHOD(RectArea_AxisAlignedRectangle_001)
+	{
+		int PointA[2] = { 6, 16 };
+		int PointB[2] = { 22, 16 };
+		int PointC[2] = { 22, 20 };
+		float expected = 64.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_AxisAlignedRectangle_002)
+	{
+		int PointA[2] = { 40, 6 };
+		int PointB[2] = { 46, 6 };
+		int PointC[2] = { 46, 16 };
+		float expected = 60.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_AxisAlignedRectangle_003)
+	{
+		int PointA[2] = { 6, 2 };
+		int PointB[2] = { 12, 2 };
+		int PointC[2] = { 12, 8 };
+		float expected = 36.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_001)
+	{
+		int PointA[2] = { 3, 5 };
+		int PointB[2] = { 16, 6 };
+		int PointC[2] = { 15, 19 };
+		float expected = 170.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_002)
+	{
+		int PointA[2] = { 11, 2 };
+		int PointB[2] = { 19, 3 };
+		int PointC[2] = { 18, 11 };
+		float expected = 65.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_003)
+	{
+		int PointA[2] = { 7, 9 };
+		int PointB[2] = { 15, 17 };
+		int PointC[2] = { 10, 22 };
+		float expected = 80.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_004)
+	{
+		int PointA[2] = { 18, 0 };
+		int PointB[2] = { 23, 3 };
+		int PointC[2] = { 20, 8 };
+		float expected = 34.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_005)
+	{
+		int PointA[2] = { 13, 0 };
+		int PointB[2] = { 20, 3 };
+		int PointC[2] = { 14, 17 };
+		float expected = 116.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_006)
+	{
+		int PointA[2] = { 13, 0 };
+		int PointB[2] = { 19, 8 };
+		int PointC[2] = { 15, 11 };
+		float expected = 50.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_007)
+	{
+		int PointA[2] = { 23, 0 };
+		int PointB[2] = { 38, 5 };
+		int PointC[2] = { 35, 14 };
+		float expected = 150.00;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
+	TEST_METHOD(RectArea_SlantedRectangle_008)
+	{
+		int PointA[2] = { 10, 0 };
+		int PointB[2] = { 15, 5 };
+		int PointC[2] = { 10, 10 };
+		float expected = 50;
+		float tolerance = 0.01;
+
+		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
+			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+	}
+
 	};
 };
 	
