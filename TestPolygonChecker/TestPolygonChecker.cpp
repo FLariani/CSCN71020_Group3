@@ -8,9 +8,12 @@ extern "C" {
 	char* analyzeTriangle(int side1, int side2, int side3);
 	float triArea(int side1, int side2, int side3);
 	void triangleAngles(int side1, int side2, int side3, float angles[]);
-	char* isRectangle(int pointA[], int pointB[], int pointC[], int pointD[]);
+
 	void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]);
 	void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]);
+	char* isRectangle(int points_x[], int points_y[], int sorted_points[]);
+	float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]);
+	float RectArea(int PointA[], int PointB[], int PointC[]);
 }
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -121,7 +124,7 @@ namespace TestRectangle {
 	};
 	//ALL TEST METHODS PASSED FOR SORT4POINTSXY -DW
 	//tests all combinations of sorting arrangements (total 24/2 for unique combinations for points_x and points_y) -DW
-	TEST_CLASS(SortedPointsXY) {
+	TEST_CLASS(Sorted4PointsXY) {
 
 
 public:
@@ -329,10 +332,12 @@ public:
 		}
 	}
 	};
-	TEST_CLASS(SortedPointsCW) {
+
+	TEST_CLASS(Sorted4PointsCCW) {
 
 
 public:
+
 	TEST_METHOD(sort4PointsCCW_AxisAlignedRectangle_001)
 	{
 		int points_X[4] = { 6, 22, 22, 6 };
@@ -576,7 +581,7 @@ public:
 		int points_X[4] = { 10, 25, 25, 10 };
 		int points_Y[4] = { 25, 10, 10, 25 };
 		int sorted_points[4] = { -1, -1, -1, -1 };
-		int expected[4] = { 0, 3, 1, 2 };
+		int expected[4] = { 1, 2, 0, 3 };
 		sort4PointsCCW(points_X, points_Y, sorted_points);
 
 		for (int x = 0; x < 4; x++) {
@@ -814,20 +819,6 @@ public:
 		int points_X[4] = { 15, 10, 5, 10 };
 		int points_Y[4] = { 5, 0, 5, 15 };
 		int sorted_points[4] = { -1, -1, -1, -1 };
-		int expected[4] = {  };
-		sort4PointsCCW(points_X, points_Y, sorted_points);
-
-		for (int x = 0; x < 4; x++) {
-
-			Assert::AreEqual(expected[x], sorted_points[x]);
-		}
-	}
-
-	TEST_METHOD(sort4PointsCCW_Kite_005)
-	{
-		int points_X[4] = { 15, 10, 5, 10 };
-		int points_Y[4] = { 5, 0, 5, 15 };
-		int sorted_points[4] = { -1, -1, -1, -1 };
 		int expected[4] = { 1, 0, 3, 2 };
 		sort4PointsCCW(points_X, points_Y, sorted_points);
 
@@ -925,7 +916,7 @@ public:
 		int points_X[4] = { 5, 5, 10, 10 };
 		int points_Y[4] = { 15, 0, 0, 10 };
 		int sorted_points[4] = { -1, -1, -1, -1 };
-		int expected[4] = { 1, 2, 0, 3 };
+		int expected[4] = { 1, 2, 3, 0 };
 		sort4PointsCCW(points_X, points_Y, sorted_points);
 
 		for (int x = 0; x < 4; x++) {
@@ -1166,7 +1157,7 @@ public:
 		int points_X[4] = { 3, 6, 2, 7 };
 		int points_Y[4] = { 4, 3, 2, 2 };
 		int sorted_points[4] = { -1, -1, -1, -1 };
-		int expected[4] = {  };
+		int expected[4] = { 2, 3, 1, 0 };
 		sort4PointsCCW(points_X, points_Y, sorted_points);
 
 		for (int x = 0; x < 4; x++) {
@@ -1194,7 +1185,7 @@ public:
 		int points_X[4] = { 9, 12, 11, 8 };
 		int points_Y[4] = { 7, 12, 11, 12 };
 		int sorted_points[4] = { -1, -1, -1, -1 };
-		int expected[4] = { 0, 2, 3, 1 };
+		int expected[4] = { 0, 1, 2, 3 };
 		sort4PointsCCW(points_X, points_Y, sorted_points);
 
 		for (int x = 0; x < 4; x++) {
@@ -1244,10 +1235,7 @@ public:
 		int points_Y[4] = { 16, 20, 16, 20 };
 		int sorted_points[4] = { 0, 2, 1, 3 };
 
-		for (int x = 0; x < 4; x++) {
-
-			Assert::IsTrue(strcmp(isRectangle(points_X, points_Y,
-		}
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_AxisAlignedRectangle_002)
@@ -1256,7 +1244,7 @@ public:
 		int points_Y[4] = { 6, 16, 6, 16 };
 		int sorted_points[4] = { 2, 0, 3, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_AxisAlignedRectangle_003)
@@ -1265,7 +1253,7 @@ public:
 		int points_Y[4] = { 2, 2, 8, 8 };
 		int sorted_points[4] = { 1, 0, 2, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_001)
@@ -1274,7 +1262,7 @@ public:
 		int points_Y[4] = { 19, 5, 6, 18 };
 		int sorted_points[4] = { 1, 2, 0, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_002)
@@ -1283,7 +1271,7 @@ public:
 		int points_Y[4] = { 3, 10, 2, 11 };
 		int sorted_points[4] = { 2, 0, 3, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_003)
@@ -1292,7 +1280,7 @@ public:
 		int points_Y[4] = { 9, 22, 14, 17 };
 		int sorted_points[4] = { 0, 3, 1, 2 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_004)
@@ -1301,7 +1289,7 @@ public:
 		int points_Y[4] = { 3, 5, 0, 8 };
 		int sorted_points[4] = { 2, 0, 3, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_005)
@@ -1310,7 +1298,7 @@ public:
 		int points_Y[4] = { 14, 3, 17, 0 };
 		int sorted_points[4] = { 3, 1, 2, 0 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_006)
@@ -1319,7 +1307,7 @@ public:
 		int points_Y[4] = { 3, 0, 11, 8 };
 		int sorted_points[4] = { 1, 3, 2, 0 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_007)
@@ -1328,7 +1316,7 @@ public:
 		int points_Y[4] = { 5, 9, 14, 0 };
 		int sorted_points[4] = { 3, 0, 2, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_SlantedRectangle_008)
@@ -1337,7 +1325,7 @@ public:
 		int points_Y[4] = { 5, 0, 5, 10 };
 		int sorted_points[4] = { 1, 0, 3, 2 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Is a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_4DifferentPoints_Lines_001)
@@ -1346,7 +1334,7 @@ public:
 		int points_Y[4] = { 15, 10, 20, 5 };
 		int sorted_points[4] = { 3, 1, 0, 2 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_4DifferentPoints_Lines_002)
@@ -1355,7 +1343,7 @@ public:
 		int points_Y[4] = { 15, 10, 25, 20 };
 		int sorted_points[4] = { 1, 0, 3, 2 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_2DifferentPoints_Lines_001)
@@ -1364,7 +1352,7 @@ public:
 		int points_Y[4] = { 20, 5, 20, 5 };
 		int sorted_points[4] = { 1, 3, 0, 2 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_2DifferentPoints_Lines_002)
@@ -1373,7 +1361,7 @@ public:
 		int points_Y[4] = { 20, 20, 20, 20 };
 		int sorted_points[4] = { 2, 3, 0, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 
@@ -1383,7 +1371,7 @@ public:
 		int points_Y[4] = { 15, 10, 5, 7 };
 		int sorted_points[4] = { 2, 3, 0, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_TriangleDegenerate_002)
@@ -1392,7 +1380,7 @@ public:
 		int points_Y[4] = { 15, 10, 5, 50 };
 		int sorted_points[4] = { 2, 1, 0, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_4SamePoints)
@@ -1401,7 +1389,7 @@ public:
 		int points_Y[4] = { 14, 14, 14, 14 };
 		int sorted_points[4] = { 0, 1, 2, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_Parallelogram_001)
@@ -1410,7 +1398,7 @@ public:
 		int points_Y[4] = { 0, 0, 10, 10 };
 		int sorted_points[4] = { 0, 1, 2, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_Parallelogram_002)
@@ -1419,7 +1407,7 @@ public:
 		int points_Y[4] = { 6, 16, 12, 22 };
 		int sorted_points[4] = { 0, 2, 3, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_Kite_001)
@@ -1428,7 +1416,7 @@ public:
 		int points_Y[4] = { 10, 9, 11, 10 };
 		int sorted_points[4] = { 1, 0, 2, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_Kite_002)
@@ -1437,7 +1425,7 @@ public:
 		int points_Y[4] = { 10, 10, 13, 7 };
 		int sorted_points[4] = { 3, 1, 2, 0 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 	TEST_METHOD(isRectangle_Trapezium_001)
 	{
@@ -1445,7 +1433,7 @@ public:
 		int points_Y[4] = { 20, 5, 20, 10 };
 		int sorted_points[4] = { 1, 3, 0, 2 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_Trapezium_002)
@@ -1454,7 +1442,7 @@ public:
 		int points_Y[4] = { 0, 5, 0, 5 };
 		int sorted_points[4] = { 2, 0, 1, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_IsocelesTrapezium_001)
@@ -1463,7 +1451,7 @@ public:
 		int points_Y[4] = { 20, 5, 20, 15 };
 		int sorted_points[4] = { 1, 0, 2, 3 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_IsocelesTrapezium_002)
@@ -1472,7 +1460,7 @@ public:
 		int points_Y[4] = { 4, 3, 3, 1 };
 		int sorted_points[4] = { 3, 1, 0, 2 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 	TEST_METHOD(isRectangle_IrregularParallelogram_001)
 	{
@@ -1480,7 +1468,7 @@ public:
 		int points_Y[4] = { 10, 15, 5, 14 };
 		int sorted_points[4] = { 2, 1, 3, 0 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_IrregularParallelogram_002)
@@ -1489,7 +1477,7 @@ public:
 		int points_Y[4] = { 4, 3, 2, 2 };
 		int sorted_points[4] = { 2, 3, 1, 0 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_Concave_001)
@@ -1498,7 +1486,7 @@ public:
 		int points_Y[4] = { 10, 9, 9, 4 };
 		int sorted_points[4] = { 3, 2, 1, 0 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 	TEST_METHOD(isRectangle_Concave_002)
@@ -1507,7 +1495,7 @@ public:
 		int points_Y[4] = { 7, 12, 11, 12 };
 		int sorted_points[4] = { 0, 2, 3, 1 };
 
-		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a Rectangle") == 0);
+		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
 

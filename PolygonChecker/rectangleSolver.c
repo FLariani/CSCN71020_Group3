@@ -4,7 +4,7 @@
 
 #include "rectangleSolver.h"
 #include "triangleSolver.h"
-//swaps the indexs of a value
+/*//swaps the indexs of a value
 void swapper(int i, int j, int Array[]) {
 	int hold = Array[j];
 	Array[j] = Array[i];
@@ -57,14 +57,15 @@ int isThreeInRow(int array[]) {
 	else {
 		return 0;
 	}
-}
+}*/
 //finds distance between two points
 float dOfPoints(int pointP[], int pointQ[]) {
-	int deltaX = pointP[0] - pointQ[0];
-	int deltaY = pointP[1] - pointQ[1];
+	int deltaX = pointQ[0] - pointP[0]  ;
+	int deltaY = pointQ[1] - pointP[1];
 	float distance = sqrtf((powf((float)deltaX, 2)) + (powf((float)deltaY, 2)));
 	return distance;
 }
+/*
 //check if index of an array 0=1 or 2=3
 int isLineOnAxis(int array[]) {
 	if ((array[0] == array[1]) || (array[2] == array[4])) {
@@ -93,7 +94,7 @@ char* isRectangles(int pointA1, int pointA2, int pointB1, int pointB2, int point
 
 	return result;
 }
-
+*/
 
 
 /*
@@ -119,27 +120,27 @@ int findArrowCase(int arrayXs[], int arrayYs[]) {
 		return 0;
 	}
 }
-
+*/
 // takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
 float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
 	float sum = 0;
-	sum += dOfPoints(&PointA, &PointB);
-	sum += dOfPoints(&PointB, &PointC);
-	sum += dOfPoints(&PointC, &PointD);
-	sum += dOfPoints(&PointD, &PointA);
+	sum += dOfPoints(PointA, PointB);
+	sum += dOfPoints(PointB, PointC);
+	sum += dOfPoints(PointC, PointD);
+	sum += dOfPoints(PointD, PointA);
 	return sum;
 }
 
 //area
-float RectArea(int PointA[], int PointB[], int PointC[], int PointD[]) {
+float RectArea(int PointA[], int PointB[], int PointC[]) {
 	float Area = 0;
-	float sideA = dOfPoints(&PointA, &PointB);
-	float sideB = dOfPoints(&PointA, &PointB);
+	float sideA = dOfPoints(PointA, PointB);
+	float sideB = dOfPoints(PointB, PointC);
 	Area = sideA * sideB;
 	return Area;
 }
 
-*/
+
 
 //ok the working ordering function for the 4 points outputs an indexes (a,b,c,d) -DW
 // before that, we need to sort points lowest to highest y and x value with sort4PointsXY -DW
@@ -151,23 +152,30 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 		sorted_x[i] = i;
 		sorted_y[i] = i;
 	}
-
+	
 	for (int i = 0; i < 3; i++) {
 
-		for (int j = i + 1; j < 4; j++) {
+		for (int j = i+1; j < 4; j++) {
 
-			if (points_x[sorted_x[i]] > points_x[sorted_x[j]]) {
+			if (points_x[sorted_x[i]] >= points_x[sorted_x[j]]) {
 
-				int temp = sorted_x[i];
-				sorted_x[i] = sorted_x[j];
-				sorted_x[j] = temp;
+				if ((sorted_x[i] < sorted_x[j]) && (points_x[sorted_x[i]] == points_x[sorted_x[j]])) {}
+				else {
+
+					int temp = sorted_x[i];
+					sorted_x[i] = sorted_x[j];
+					sorted_x[j] = temp;
+				}
 			}
 
-			if (points_y[sorted_y[i]] > points_y[sorted_y[j]]) {
+			if (points_y[sorted_y[i]] >= points_y[sorted_y[j]]) {
 
-				int temp = sorted_y[i];
-				sorted_y[i] = sorted_y[j];
-				sorted_y[j] = temp;
+				if ((sorted_y[i] < sorted_y[j]) && (points_y[sorted_y[i]] == points_y[sorted_y[j]])) {}
+				else {
+					int temp = sorted_y[i];
+					sorted_y[i] = sorted_y[j];
+					sorted_y[j] = temp;
+				}
 			}
 		}
 	}
@@ -207,15 +215,16 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 	//the element index of position_sorted_y is the same as points_y translated into sorted_y's translation of points_x -DW
 	int position_sorted_y[4] = { -1,-1,-1,-1 };
 	int position_sorted_x[4] = { -1,-1,-1,-1 };
-	for (int x = 0; x < 4; x++) {
+	for (int x=0; x<4; x++) {
 
-		if (sorted_points[x] >= 0 && sorted_points[x] <= 3) {
-
+		if ((sorted_x[x] >= 0 && sorted_x[x] <= 3) && (sorted_y[x] >= 0 && sorted_y[x] <= 3)) {
+		
 
 			position_sorted_x[sorted_x[x]] = x;
 			position_sorted_y[sorted_y[x]] = x;
 		}
 	}
+	
 	//used to determine the 3 collinear points
 	int flag = -1;
 	//find sorted_points[1], [2], [3] by smallest angle -DW
@@ -263,7 +272,7 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 						next_point = i;
 					}
 				}
-				else if (points_y[i] == points_y[next_point]) {
+				else if (*(points_y+i) == *(points_y+next_point)) {
 
 					if (position_sorted_x[i] < position_sorted_x[next_point]) {
 
@@ -275,6 +284,7 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 
 					next_point = i;
 				}
+
 				flag = next_point;
 			}
 		}
