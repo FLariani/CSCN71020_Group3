@@ -59,10 +59,10 @@ int isThreeInRow(int array[]) {
 	}
 }*/
 //finds distance between two points
-float dOfPoints(int pointP[], int pointQ[]) {
-	int deltaX = pointQ[0] - pointP[0]  ;
-	int deltaY = pointQ[1] - pointP[1];
-	float distance = sqrtf((powf((float)deltaX, 2)) + (powf((float)deltaY, 2)));
+double dOfPoints(int pointP[], int pointQ[]) {
+	double deltaX = pointQ[0] - pointP[0]  ;
+	double deltaY = pointQ[1] - pointP[1];
+	double distance = sqrtf((powf(deltaX, 2)) + (powf(deltaY, 2)));
 	return distance;
 }
 /*
@@ -122,8 +122,8 @@ int findArrowCase(int arrayXs[], int arrayYs[]) {
 }
 */
 // takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
-float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
-	float sum = 0;
+double shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
+	double sum = 0;
 	sum += dOfPoints(PointA, PointB);
 	sum += dOfPoints(PointB, PointC);
 	sum += dOfPoints(PointC, PointD);
@@ -132,10 +132,10 @@ float shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
 }
 
 //area
-float RectArea(int PointA[], int PointB[], int PointC[]) {
-	float Area = 0;
-	float sideA = dOfPoints(PointA, PointB);
-	float sideB = dOfPoints(PointB, PointC);
+double RectArea(int PointA[], int PointB[], int PointC[]) {
+	double Area = 0;
+	double sideA = dOfPoints(PointA, PointB);
+	double sideB = dOfPoints(PointB, PointC);
 	Area = sideA * sideB;
 	return Area;
 }
@@ -249,10 +249,10 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 				continue;
 			}
 
-			long dx1 = points_x[i] - points_x[sorted_points[0]];
-			long dy1 = points_y[i] - points_y[sorted_points[0]];
-			long dx2 = points_x[next_point] - points_x[sorted_points[0]];
-			long dy2 = points_y[next_point] - points_y[sorted_points[0]];
+			long long dx1 = points_x[i] - points_x[sorted_points[0]];
+			long long dy1 = points_y[i] - points_y[sorted_points[0]];
+			long long dx2 = points_x[next_point] - points_x[sorted_points[0]];
+			long long dy2 = points_y[next_point] - points_y[sorted_points[0]];
 
 			long cross = dy1 * dx2 - dy2 * dx1;
 
@@ -370,10 +370,10 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 		}
 		
 		//finds the translation of x and y between the tested cooordinate and the next or previous coordinate -DW
-		long long nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
-		long long nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
-		long long prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
-		long long prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
+		long nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
+		long nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
+		long prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
+		long prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
 
 		//if dot product is not 0 then the angle is not 90 degrees -DW
 		//if the delta X and Y between the coordinate being tested and the next/previous coodinate is 0 then it is a duplicate coordinate -DW

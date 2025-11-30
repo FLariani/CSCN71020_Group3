@@ -234,16 +234,16 @@ void handleRectangle(void) {
     int D[2] = { px[order[3]], py[order[3]] };
 
     // perimeter always -FL
-    float perimeter = shapePerimeter(A, B, C, D);
-    printf("\nPerimeter: %.2f\n", perimeter);
+    double perimeter = shapePerimeter(A, B, C, D);
+    printf("\nPerimeter: %.2lf\n", perimeter);
 
     // rectangle check -FL
     char* rectResult = isRectangle(px, py, order);
 
     if (strcmp(rectResult, "Is a rectangle") == 0) {
-        float area = RectArea(A, B, C);
+        double area = RectArea(A, B, C);
         printf("This shape is a rectangle.\n");
-        printf("Area: %.2f\n\n", area);
+        printf("Area: %.2lf\n\n", area);
     }
     else {
         printf("This shape is not a rectangle.\n\n");
