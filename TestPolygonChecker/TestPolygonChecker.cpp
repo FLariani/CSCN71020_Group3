@@ -126,7 +126,6 @@ namespace TestRectangle {
 	//tests all combinations of sorting arrangements (total 24/2 for unique combinations for points_x and points_y) -DW
 	TEST_CLASS(Sorted4PointsXY) {
 
-
 public:
 	TEST_METHOD(sort4PointsXY_001)
 	{
@@ -334,7 +333,6 @@ public:
 	};
 
 	TEST_CLASS(Sorted4PointsCCW) {
-
 
 public:
 
@@ -1026,7 +1024,6 @@ public:
 		}
 	}
 
-	//real one
 	TEST_METHOD(sort4PointsCCW_IsocelesTrapezium_002)
 	{
 		int points_X[4] = { 3, 6, 1, 7 };
@@ -1226,7 +1223,6 @@ public:
 
 	TEST_CLASS(IsRectangle) {
 
-
 public:
 
 	TEST_METHOD(isRectangle_AxisAlignedRectangle_001)
@@ -1364,7 +1360,6 @@ public:
 		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 
-
 	TEST_METHOD(isRectangle_TriangleDegenerate_001)
 	{
 		int points_X[4] = { 20, 15, 10, 30 };
@@ -1497,545 +1492,536 @@ public:
 
 		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
-
-
-
-
 	};
 	TEST_CLASS(RectanglePerimeter) {
-
 
 public:
 
 	TEST_METHOD(shapePerimeter_AxisAlignedRectangle_001)
 	{
-		int PointA[2] = { 6, 16 };
-		int PointB[2] = { 22, 16 };
-		int PointC[2] = { 22, 20 };
-		int PointD[2] = { 6, 20 };
+		int pointA[2] = { 6, 16 };
+		int pointB[2] = { 22, 16 };
+		int pointC[2] = { 22, 20 };
+		int pointD[2] = { 6, 20 };
 		double expected = 40.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_AxisAlignedRectangle_002)
 	{
-		int PointA[2] = { 40, 6 };
-		int PointB[2] = { 46, 6 };
-		int PointC[2] = { 46, 16 };
-		int PointD[2] = { 40, 16 };
+		int pointA[2] = { 40, 6 };
+		int pointB[2] = { 46, 6 };
+		int pointC[2] = { 46, 16 };
+		int pointD[2] = { 40, 16 };
 		double expected = 32.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_AxisAlignedRectangle_003)
 	{
-		int PointA[2] = { 6, 2 };
-		int PointB[2] = { 12, 2 };
-		int PointC[2] = { 12, 8 };
-		int PointD[2] = { 6, 8 };
+		int pointA[2] = { 6, 2 };
+		int pointB[2] = { 12, 2 };
+		int pointC[2] = { 12, 8 };
+		int pointD[2] = { 6, 8 };
 		double expected = 24.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_001)
 	{
-		int PointA[2] = { 3, 5 };
-		int PointB[2] = { 16, 6 };
-		int PointC[2] = { 15, 19 };
-		int PointD[2] = { 2, 18 };
+		int pointA[2] = { 3, 5 };
+		int pointB[2] = { 16, 6 };
+		int pointC[2] = { 15, 19 };
+		int pointD[2] = { 2, 18 };
 		double expected = 52.152;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_002)
 	{
-		int PointA[2] = { 11, 2 };
-		int PointB[2] = { 19, 3 };
-		int PointC[2] = { 18, 11 };
-		int PointD[2] = { 10, 10 };
+		int pointA[2] = { 11, 2 };
+		int pointB[2] = { 19, 3 };
+		int pointC[2] = { 18, 11 };
+		int pointD[2] = { 10, 10 };
 		double expected = 32.248;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_003)
 	{
-		int PointA[2] = { 7, 9 };
-		int PointB[2] = { 15, 17 };
-		int PointC[2] = { 10, 22 };
-		int PointD[2] = { 2, 14 };
+		int pointA[2] = { 7, 9 };
+		int pointB[2] = { 15, 17 };
+		int pointC[2] = { 10, 22 };
+		int pointD[2] = { 2, 14 };
 		double expected = 36.769;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_004)
 	{
-		int PointA[2] = { 18, 0 };
-		int PointB[2] = { 23, 3 };
-		int PointC[2] = { 20, 8 };
-		int PointD[2] = { 15, 5 };
+		int pointA[2] = { 18, 0 };
+		int pointB[2] = { 23, 3 };
+		int pointC[2] = { 20, 8 };
+		int pointD[2] = { 15, 5 };
 		double expected = 23.323;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_005)
 	{
-		int PointA[2] = { 13, 0 };
-		int PointB[2] = { 20, 3 };
-		int PointC[2] = { 14, 17 };
-		int PointD[2] = { 7, 14 };
+		int pointA[2] = { 13, 0 };
+		int pointB[2] = { 20, 3 };
+		int pointC[2] = { 14, 17 };
+		int pointD[2] = { 7, 14 };
 		double expected = 45.694;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_006)
 	{
-		int PointA[2] = { 13, 0 };
-		int PointB[2] = { 19, 8 };
-		int PointC[2] = { 15, 11 };
-		int PointD[2] = { 9, 3 };
+		int pointA[2] = { 13, 0 };
+		int pointB[2] = { 19, 8 };
+		int pointC[2] = { 15, 11 };
+		int pointD[2] = { 9, 3 };
 		double expected = 30.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_007)
 	{
-		int PointA[2] = { 23, 0 };
-		int PointB[2] = { 38, 5 };
-		int PointC[2] = { 35, 14 };
-		int PointD[2] = { 20, 9 };
+		int pointA[2] = { 23, 0 };
+		int pointB[2] = { 38, 5 };
+		int pointC[2] = { 35, 14 };
+		int pointD[2] = { 20, 9 };
 		double expected = 50.596;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_SlantedRectangle_008)
 	{
-		int PointA[2] = { 10, 0 };
-		int PointB[2] = { 15, 5 };
-		int PointC[2] = { 10, 10 };
-		int PointD[2] = { 5, 5 };
+		int pointA[2] = { 10, 0 };
+		int pointB[2] = { 15, 5 };
+		int pointC[2] = { 10, 10 };
+		int pointD[2] = { 5, 5 };
 		double expected = 28.28;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_4DifferentPoints_Lines_001)
 	{
-		int PointA[2] = { 10, 5 };
-		int PointB[2] = { 15, 10 };
-		int PointC[2] = { 20, 15 };
-		int PointD[2] = { 25, 20 };
+		int pointA[2] = { 10, 5 };
+		int pointB[2] = { 15, 10 };
+		int pointC[2] = { 20, 15 };
+		int pointD[2] = { 25, 20 };
 		double expected = 42.426;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_4DifferentPoints_Lines_002)
 	{
-		int PointA[2] = { 20, 10 };
-		int PointB[2] = { 20, 15 };
-		int PointC[2] = { 20, 20 };
-		int PointD[2] = { 20, 25 };
+		int pointA[2] = { 20, 10 };
+		int pointB[2] = { 20, 15 };
+		int pointC[2] = { 20, 20 };
+		int pointD[2] = { 20, 25 };
 		double expected = 30.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_2DifferentPoints_Lines_001)
 	{
-		int PointA[2] = { 10, 5 };
-		int PointB[2] = { 10, 5 };
-		int PointC[2] = { 25, 20 };
-		int PointD[2] = { 25, 20 };
+		int pointA[2] = { 10, 5 };
+		int pointB[2] = { 10, 5 };
+		int pointC[2] = { 25, 20 };
+		int pointD[2] = { 25, 20 };
 		double expected = 42.426;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_2DifferentPoints_Lines_002)
 	{
-		int PointA[2] = { 5, 20 };
-		int PointB[2] = { 5, 20 };
-		int PointC[2] = { 20, 20 };
-		int PointD[2] = { 20, 20 };
+		int pointA[2] = { 5, 20 };
+		int pointB[2] = { 5, 20 };
+		int pointC[2] = { 20, 20 };
+		int pointD[2] = { 20, 20 };
 		double expected = 30.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_TriangleDegenerate_001)
 	{
-		int PointA[2] = { 10, 5 };
-		int PointB[2] = { 30, 7 };
-		int PointC[2] = { 20, 15 };
-		int PointD[2] = { 15, 10 };
+		int pointA[2] = { 10, 5 };
+		int pointB[2] = { 30, 7 };
+		int pointC[2] = { 20, 15 };
+		int pointD[2] = { 15, 10 };
 		double expected = 47.047;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_TriangleDegenerate_002)
 	{
-		int PointA[2] = { 10, 5 };
-		int PointB[2] = { 15, 10 };
-		int PointC[2] = { 20, 15 };
-		int PointD[2] = { 5, 50 };
+		int pointA[2] = { 10, 5 };
+		int pointB[2] = { 15, 10 };
+		int pointC[2] = { 20, 15 };
+		int pointD[2] = { 5, 50 };
 		double expected = 97.498;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_4SamePoints)
 	{
-		int PointA[2] = { 24, 14 };
-		int PointB[2] = { 24, 14 };
-		int PointC[2] = { 24, 14 };
-		int PointD[2] = { 24, 14 };
+		int pointA[2] = { 24, 14 };
+		int pointB[2] = { 24, 14 };
+		int pointC[2] = { 24, 14 };
+		int pointD[2] = { 24, 14 };
 		double expected = 0;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Parallelogram_001)
 	{
-		int PointA[2] = { 0, 0 };
-		int PointB[2] = { 15, 0 };
-		int PointC[2] = { 20, 10 };
-		int PointD[2] = { 5, 10 };
+		int pointA[2] = { 0, 0 };
+		int pointB[2] = { 15, 0 };
+		int pointC[2] = { 20, 10 };
+		int pointD[2] = { 5, 10 };
 		double expected = 52.360;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Parallelogram_002)
 	{
-		int PointA[2] = { 6, 6 };
-		int PointB[2] = { 14, 12 };
-		int PointC[2] = { 14, 22 };
-		int PointD[2] = { 6, 16 };
+		int pointA[2] = { 6, 6 };
+		int pointB[2] = { 14, 12 };
+		int pointC[2] = { 14, 22 };
+		int pointD[2] = { 6, 16 };
 		double expected = 40;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Kite_001)
 	{
-		int PointA[2] = { 16, 9 };
-		int PointB[2] = { 19, 10 };
-		int PointC[2] = { 16, 11 };
-		int PointD[2] = { 15, 10 };
+		int pointA[2] = { 16, 9 };
+		int pointB[2] = { 19, 10 };
+		int pointC[2] = { 16, 11 };
+		int pointD[2] = { 15, 10 };
 		double expected = 9.152;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Kite_002)
 	{
-		int PointA[2] = { 16, 7 };
-		int PointB[2] = { 25, 10 };
-		int PointC[2] = { 16, 13 };
-		int PointD[2] = { 13, 10 };
+		int pointA[2] = { 16, 7 };
+		int pointB[2] = { 25, 10 };
+		int pointC[2] = { 16, 13 };
+		int pointD[2] = { 13, 10 };
 		double expected = 27.460;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Trapisum_001)
 	{
-		int PointA[2] = { 15, 5 };
-		int PointB[2] = { 35, 10 };
-		int PointC[2] = { 35, 20 };
-		int PointD[2] = { 25, 20 };
+		int pointA[2] = { 15, 5 };
+		int pointB[2] = { 35, 10 };
+		int pointC[2] = { 35, 20 };
+		int pointD[2] = { 25, 20 };
 		double expected = 58.644;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Trapisum_002)
 	{
-		int PointA[2] = { 0, 0 };
-		int PointB[2] = { 15, 0 };
-		int PointC[2] = { 15, 5 };
-		int PointD[2] = { 5, 5 };
+		int pointA[2] = { 0, 0 };
+		int pointB[2] = { 15, 0 };
+		int pointC[2] = { 15, 5 };
+		int pointD[2] = { 5, 5 };
 		double expected = 37.071;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_IsocelesTrapisum_001)
 	{
-		int PointA[2] = { 10, 5 };
-		int PointB[2] = { 25, 20 };
-		int PointC[2] = { 15, 20 };
-		int PointD[2] = { 10, 15 };
+		int pointA[2] = { 10, 5 };
+		int pointB[2] = { 25, 20 };
+		int pointC[2] = { 15, 20 };
+		int pointD[2] = { 10, 15 };
 		double expected = 48.284;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_IsocelesTrapisum_002)
 	{
-		int PointA[2] = { 7, 1 };
-		int PointB[2] = { 6, 3 };
-		int PointC[2] = { 3, 4 };
-		int PointD[2] = { 1, 3 };
+		int pointA[2] = { 7, 1 };
+		int pointB[2] = { 6, 3 };
+		int pointC[2] = { 3, 4 };
+		int pointD[2] = { 1, 3 };
 		double expected = 13.959;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_IrregularParallelogram_001)
 	{
-		int PointA[2] = { 15, 5 };
-		int PointB[2] = { 20, 15 };
-		int PointC[2] = { 11, 14 };
-		int PointD[2] = { 10, 10 };
+		int pointA[2] = { 15, 5 };
+		int pointB[2] = { 20, 15 };
+		int pointC[2] = { 11, 14 };
+		int pointD[2] = { 10, 10 };
 		double expected = 31.429;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_IrregularParallelogram_002)
 	{
-		int PointA[2] = { 2, 2 };
-		int PointB[2] = { 7, 2 };
-		int PointC[2] = { 6, 3 };
-		int PointD[2] = { 3, 4 };
+		int pointA[2] = { 2, 2 };
+		int pointB[2] = { 7, 2 };
+		int pointC[2] = { 6, 3 };
+		int pointD[2] = { 3, 4 };
 		double expected = 11.812;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Concave_001)
 	{
-		int PointA[2] = { 8, 4 };
-		int PointB[2] = { 7, 9 };
-		int PointC[2] = { 5, 9 };
-		int PointD[2] = { 4, 10 };
+		int pointA[2] = { 8, 4 };
+		int pointB[2] = { 7, 9 };
+		int pointC[2] = { 5, 9 };
+		int pointD[2] = { 4, 10 };
 		double expected = 15.724;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
 
 	TEST_METHOD(shapePerimeter_Concave_002)
 	{
-		int PointA[2] = { 9, 7 };
-		int PointB[2] = { 11, 11 };
-		int PointC[2] = { 8, 12 };
-		int PointD[2] = { 12, 12 };
+		int pointA[2] = { 9, 7 };
+		int pointB[2] = { 11, 11 };
+		int pointC[2] = { 8, 12 };
+		int pointD[2] = { 12, 12 };
 		double expected = 17.465;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((shapePerimeter(PointA, PointB, PointC, PointD) < expected + tolerance)
-			&& (shapePerimeter(PointA, PointB, PointC, PointD) > expected - tolerance));
+		Assert::IsTrue((shapePerimeter(pointA, pointB, pointC, pointD) < expected + tolerance)
+			&& (shapePerimeter(pointA, pointB, pointC, pointD) > expected - tolerance));
 	}
-
-
 	};
 	TEST_CLASS(RectangleArea) {
-
 
 public:
 
 	TEST_METHOD(RectArea_AxisAlignedRectangle_001)
 	{
-		int PointA[2] = { 6, 16 };
-		int PointB[2] = { 22, 16 };
-		int PointC[2] = { 22, 20 };
+		int pointA[2] = { 6, 16 };
+		int pointB[2] = { 22, 16 };
+		int pointC[2] = { 22, 20 };
 		double expected = 64.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_AxisAlignedRectangle_002)
 	{
-		int PointA[2] = { 40, 6 };
-		int PointB[2] = { 46, 6 };
-		int PointC[2] = { 46, 16 };
+		int pointA[2] = { 40, 6 };
+		int pointB[2] = { 46, 6 };
+		int pointC[2] = { 46, 16 };
 		double expected = 60.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_AxisAlignedRectangle_003)
 	{
-		int PointA[2] = { 6, 2 };
-		int PointB[2] = { 12, 2 };
-		int PointC[2] = { 12, 8 };
+		int pointA[2] = { 6, 2 };
+		int pointB[2] = { 12, 2 };
+		int pointC[2] = { 12, 8 };
 		float expected = 36.00;
 		float tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_001)
 	{
-		int PointA[2] = { 3, 5 };
-		int PointB[2] = { 16, 6 };
-		int PointC[2] = { 15, 19 };
+		int pointA[2] = { 3, 5 };
+		int pointB[2] = { 16, 6 };
+		int pointC[2] = { 15, 19 };
 		double expected = 170.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_002)
 	{
-		int PointA[2] = { 11, 2 };
-		int PointB[2] = { 19, 3 };
-		int PointC[2] = { 18, 11 };
+		int pointA[2] = { 11, 2 };
+		int pointB[2] = { 19, 3 };
+		int pointC[2] = { 18, 11 };
 		double expected = 65.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_003)
 	{
-		int PointA[2] = { 7, 9 };
-		int PointB[2] = { 15, 17 };
-		int PointC[2] = { 10, 22 };
+		int pointA[2] = { 7, 9 };
+		int pointB[2] = { 15, 17 };
+		int pointC[2] = { 10, 22 };
 		double expected = 80.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_004)
 	{
-		int PointA[2] = { 18, 0 };
-		int PointB[2] = { 23, 3 };
-		int PointC[2] = { 20, 8 };
+		int pointA[2] = { 18, 0 };
+		int pointB[2] = { 23, 3 };
+		int pointC[2] = { 20, 8 };
 		double expected = 34.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_005)
 	{
-		int PointA[2] = { 13, 0 };
-		int PointB[2] = { 20, 3 };
-		int PointC[2] = { 14, 17 };
+		int pointA[2] = { 13, 0 };
+		int pointB[2] = { 20, 3 };
+		int pointC[2] = { 14, 17 };
 		double expected = 116.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_006)
 	{
-		int PointA[2] = { 13, 0 };
-		int PointB[2] = { 19, 8 };
-		int PointC[2] = { 15, 11 };
+		int pointA[2] = { 13, 0 };
+		int pointB[2] = { 19, 8 };
+		int pointC[2] = { 15, 11 };
 		double expected = 50.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_007)
 	{
-		int PointA[2] = { 23, 0 };
-		int PointB[2] = { 38, 5 };
-		int PointC[2] = { 35, 14 };
+		int pointA[2] = { 23, 0 };
+		int pointB[2] = { 38, 5 };
+		int pointC[2] = { 35, 14 };
 		double expected = 150.00;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
 
 	TEST_METHOD(RectArea_SlantedRectangle_008)
 	{
-		int PointA[2] = { 10, 0 };
-		int PointB[2] = { 15, 5 };
-		int PointC[2] = { 10, 10 };
+		int pointA[2] = { 10, 0 };
+		int pointB[2] = { 15, 5 };
+		int pointC[2] = { 10, 10 };
 		double expected = 50;
 		double tolerance = 0.01;
 
-		Assert::IsTrue((RectArea(PointA, PointB, PointC) < expected + tolerance)
-			&& (RectArea(PointA, PointB, PointC) > expected - tolerance));
+		Assert::IsTrue((RectArea(pointA, pointB, pointC) < expected + tolerance)
+			&& (RectArea(pointA, pointB, pointC) > expected - tolerance));
 	}
-
 	};
 };
 	
