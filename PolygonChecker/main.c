@@ -130,7 +130,6 @@ void printWelcome(void) {
 void printShapeMenu(int* shapeChoice) {
     int scanned = 0;
 
-    do {
         printf("Choose a shape:\n");
         printf("1. Triangle:\n");
         printf("2. Rectangle:\n");
@@ -138,19 +137,12 @@ void printShapeMenu(int* shapeChoice) {
         printf("Enter number: ");
 
         scanned = scanf_s("%d", shapeChoice);
-
+        clearInputBuffer();
         if (scanned != 1) {
             printf("Invalid input. Please enter 0, 1, or 2.\n\n");
-            clearInputBuffer();
+            
             *shapeChoice = -1;   // force repeat -FL
-        }
-        else {
-            clearInputBuffer();  //remove leftover newline -FL
-            if (*shapeChoice != 0 && *shapeChoice != 1 && *shapeChoice != 2) {
-                printf("Invalid option. Please enter 0, 1, or 2.\n\n");
-            }
-        }
-    } while (*shapeChoice != 0 && *shapeChoice != 1 && *shapeChoice != 2);
+        }    
 }
 
 // reads 3 sides, but repeats if the user types something non-numeric -FL
@@ -162,14 +154,13 @@ void getTriangleSides(int triangleSides[3]) {
         do {
             printf("Side %d: ", i + 1);
             scanned = scanf_s("%d", &triangleSides[i]);
-
+            clearInputBuffer();
             if (scanned != 1) {
                 printf("Invalid input. Please enter a number.\n");
-                clearInputBuffer();
+                
             }
         } while (scanned != 1);
 
-        clearInputBuffer();
     }
 }
 
@@ -182,14 +173,13 @@ void getRectanglePoints(int points_x[4], int points_y[4]) {
         do {
             printf("Point %d (x y): ", i + 1);
             scanned = scanf_s("%d %d", &points_x[i], &points_y[i]);
-
+            clearInputBuffer();
             if (scanned != 2) {
                 printf("Invalid input. Please enter two integers like: 0 2\n");
-                clearInputBuffer();
+                
             }
         } while (scanned != 2);
 
-        clearInputBuffer();
     }
 }
 
