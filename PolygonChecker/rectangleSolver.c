@@ -4,60 +4,6 @@
 
 #include "rectangleSolver.h"
 #include "triangleSolver.h"
-/*//swaps the indexs of a value
-void swapper(int i, int j, int Array[]) {
-	int hold = Array[j];
-	Array[j] = Array[i];
-	Array[i] = hold;
-}
-//swap values at index logic from of the first array from smallest# to bigest#,
-//if it's tied sort the ties by bigest# to smallest# of the second array - JW 
-void sortLowToHigh(int arrayOne[], int arrayTwo[], int arraySize) {
-	for (int i = 0; i < arraySize; i++) {
-
-		// j=i since we already made the first index the lowest we dont have to check again
-		for (int j = i; j < arraySize; j++) {
-
-			//if next index is bigger
-			if (arrayOne[i] > arrayOne[j]) {
-
-				//swap the position of x's is that index is smaller
-				swapper(i, j, arrayOne);
-				//mirror the swap
-				swapper(i, j, arrayTwo);
-			}
-			//if the next element checked is the same swap it base on if y is bigger
-			if (arrayOne[i] == arrayOne[j]) {
-				if (arrayTwo[i] > arrayTwo[j]) {
-					swapper(i, j, arrayOne);
-					swapper(i, j, arrayTwo);
-				}
-			}
-		}
-	}
-}
-//print point:originally did this with loop, then realized i could use a single print statement
-void printPoint(int point[]) {
-	printf("(%d,%d) ", point[0], point[1]);
-}
-//print the array passed
-void printArray(int array[], int size) {
-	for (int i = 0; i < size; i++) {
-		printf("%d ", array[i]);
-	}
-	//printf("\n");
-}
-//finds if three in a row in a sorted function
-int isThreeInRow(int array[]) {
-	//if the index 2 apart are the same the one between is also same since its sorted
-	if (array[0] == array[2] || array[1] == array[4]) {
-		printf("\nthree points share an axis, its not a rectangle\n");
-		return 1;
-	}
-	else {
-		return 0;
-	}
-}*/
 //finds distance between two points
 double dOfPoints(int pointP[], int pointQ[]) {
 	double deltaX = pointQ[0] - pointP[0]  ;
@@ -65,62 +11,7 @@ double dOfPoints(int pointP[], int pointQ[]) {
 	double distance = sqrtf((powf(deltaX, 2)) + (powf(deltaY, 2)));
 	return distance;
 }
-/*
-//check if index of an array 0=1 or 2=3
-int isLineOnAxis(int array[]) {
-	if ((array[0] == array[1]) || (array[2] == array[4])) {
-		if ((array[0] == array[1]) || (array[2] == array[4])) {
-			return 2;
-		}
-		else {
-			return 1;
-		}
 
-	}
-	else {
-		return 0;
-	}
-}
-char* isRectangles(int pointA1, int pointA2, int pointB1, int pointB2, int pointC1, int pointC2, int pointD1, int pointD2) {
-	char* result = "";
-	
-	if (pointA1 - pointB1 == pointC2 - pointB2 == pointD1 - pointC1 == pointD2 - pointA2)
-	{
-		result = "This is a rectangle!";
-	} else if (pointA1 - pointB1 == pointC2 - pointB2 == pointD1 - pointC1 == pointD2 - pointA2)
-	{
-		result = "This is a rectangle!";
-	}
-
-	return result;
-}
-*/
-
-
-/*
-int findArrowCase(int arrayXs[], int arrayYs[]) {
-	int pointA[2];
-	int pointB[2];
-	int pointC[2];
-	int pointD[2];
-	pointA[0] = arrayXs[0];
-	pointA[1] = arrayYs[0];
-	pointB[0] = arrayXs[1];
-	pointB[1] = arrayYs[1];
-	pointC[0] = arrayXs[2];
-	pointC[1] = arrayYs[2];
-	pointD[0] = arrayXs[3];
-	pointD[1] = arrayYs[3];
-	int isBInC = pointIsInTri(pointA, pointC, pointD, pointB);
-	int isCInB = pointIsInTri(pointA, pointB, pointD, pointD);
-	if (isBInC == 1 || isCInB == 1) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
-}
-*/
 // takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
 double shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
 	double sum = 0;
@@ -294,51 +185,6 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 		used_points[next_point] = 1;
 	}
 }
-/*
-char* isRectangle(int pointA[],int pointB[],int pointC[],int pointD[]) {
-
-	//we can make a function to do some of this stuff
-	float a_b_x = pointB[0] - pointA[0];
-	float a_b_y = pointB[1] - pointA[1];
-
-	float a_d_x = pointD[0] - pointA[0];
-	float a_d_y = pointD[1] - pointA[1];
-
-	float b_a_x = pointA[0] - pointB[0];
-	float b_a_y = pointA[1] - pointB[1];
-
-	float b_c_x = pointC[0] - pointB[0];
-	float b_c_y = pointC[1] - pointB[1];
-
-	float c_b_x = pointB[0] - pointC[0];
-	float c_b_y = pointB[1] - pointC[1];
-
-	float c_d_x = pointD[0] - pointC[0];
-	float c_d_y = pointD[1] - pointC[1];
-
-	float d_c_x = pointC[0] - pointD[0];
-	float d_c_y = pointC[1] - pointD[1];
-
-	float d_a_x = pointA[0] - pointD[0];
-	float d_a_y = pointA[1] - pointD[1];
-
-	float ab_dot_ad = (a_b_x * a_d_x) + (a_b_y * a_d_y);
-	float ba_dot_bc = (b_a_x * b_c_x) + (b_a_y * b_c_y);
-	float cb_dot_cd = (c_b_x * c_d_x) + (c_b_y * c_d_y);
-	float dc_dot_da = (d_c_x * d_a_x) + (d_c_y * d_c_y);
-
-	if ((ab_dot_ad + ba_dot_bc + cb_dot_cd + dc_dot_da) == 0) {
-
-		return "Is a rectangle";
-	}
-
-	else {
-
-		return "Not a rectangle";
-	}
-}
-*/
- //or
  //probably use this one because it has the ability to work with duplicate coordinates -DW
 char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 	
@@ -385,4 +231,4 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 	}
 	return "Is a rectangle";
 }
-//its about the same amount of lines
+
