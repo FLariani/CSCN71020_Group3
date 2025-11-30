@@ -130,19 +130,18 @@ void printWelcome(void) {
 void printShapeMenu(int* shapeChoice) {
     int scanned = 0;
 
-        printf("Choose a shape:\n");
-        printf("1. Triangle:\n");
-        printf("2. Rectangle:\n");
-        printf("0. Exit\n");
-        printf("Enter number: ");
+    printf("Choose a shape:\n");
+    printf("1. Triangle:\n");
+    printf("2. Rectangle:\n");
+    printf("0. Exit\n");
+    printf("Enter number: ");
 
-        scanned = scanf_s("%d", shapeChoice);
-        clearInputBuffer();
-        if (scanned != 1) {
-            printf("Invalid input. Please enter 0, 1, or 2.\n\n");
-            
-            *shapeChoice = -1;   // force repeat -FL
-        }    
+    scanned = scanf_s("%d", shapeChoice);
+    clearInputBuffer();
+    if (scanned != 1) {
+        printf("Invalid input. Please enter 0, 1, or 2.\n\n");
+        *shapeChoice = -1;   // force repeat -FL
+    }
 }
 
 // reads 3 sides, but repeats if the user types something non-numeric -FL
@@ -157,29 +156,33 @@ void getTriangleSides(int triangleSides[3]) {
             clearInputBuffer();
             if (scanned != 1) {
                 printf("Invalid input. Please enter a number.\n");
-                
             }
         } while (scanned != 1);
-
     }
 }
 
 // reads 4 points, each as two ints; repeats if input is bad -FL
+// NOW also rejects negative coordinates for rectangle input -FL
 void getRectanglePoints(int points_x[4], int points_y[4]) {
     int scanned;
 
-    printf("Enter 4 points as x y:\n");
+    printf("Enter 4 points as x y (no negative values):\n");
     for (int i = 0; i < 4; i++) {
         do {
             printf("Point %d (x y): ", i + 1);
             scanned = scanf_s("%d %d", &points_x[i], &points_y[i]);
             clearInputBuffer();
+
             if (scanned != 2) {
                 printf("Invalid input. Please enter two integers like: 0 2\n");
-                
             }
-        } while (scanned != 2);
+            else if (points_x[i] < 0 || points_y[i] < 0) {
+                // reject negative coordinates and ask again -FL
+                printf("Coordinates cannot be negative. Please enter x and y >= 0.\n");
+                scanned = 0;  // force repeat
+            }
 
+        } while (scanned != 2);
     }
 }
 
