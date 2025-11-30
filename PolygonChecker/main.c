@@ -62,7 +62,6 @@ void getTriangleSides(int* triangleSides) {
 }
 
 */
-
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -70,13 +69,21 @@ void getTriangleSides(int* triangleSides) {
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
 
-//Function prototypes 
+// Function prototypes -FL
 void printWelcome(void);
 void printShapeMenu(int* shapeChoice);
 void getTriangleSides(int triangleSides[3]);
 void getRectanglePoints(int points_x[4], int points_y[4]);
 void handleTriangle(void);
 void handleRectangle(void);
+
+// helper to flush leftover characters from stdin -FL
+void clearInputBuffer(void) {
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        // throw away -FL
+    }
+}
 
 int main(void) {
     bool continueProgram = true;
@@ -102,6 +109,7 @@ int main(void) {
             break;
 
         default:
+            // should not really happen because printShapeMenu checks -FL
             printf("Invalid value entered.\n\n");
             break;
         }
@@ -110,7 +118,7 @@ int main(void) {
     return 0;
 }
 
-// Menu and input functions 
+// Menu and input functions -FL
 
 void printWelcome(void) {
     printf("\n");
@@ -118,32 +126,74 @@ void printWelcome(void) {
     printf("-----------------\n\n");
 }
 
+//asks until user enters 0, 1, or 2 and a real number -FL
 void printShapeMenu(int* shapeChoice) {
-    printf("Choose a shape:\n");
-    printf("1. Triangle (type and angles)\n");
-    printf("2. Four points (perimeter and rectangle check)\n");
-    printf("0. Exit\n");
-    printf("Enter number: ");
+    int scanned = 0;
 
-    scanf_s("%d", shapeChoice);
+    do {
+        printf("Choose a shape:\n");
+        printf("1. Triangle:\n");
+        printf("2. Rectangle:\n");
+        printf("0. Exit\n");
+        printf("Enter number: ");
+
+        scanned = scanf_s("%d", shapeChoice);
+
+        if (scanned != 1) {
+            printf("Invalid input. Please enter 0, 1, or 2.\n\n");
+            clearInputBuffer();
+            *shapeChoice = -1;   // force repeat -FL
+        }
+        else {
+            clearInputBuffer();  //remove leftover newline -FL
+            if (*shapeChoice != 0 && *shapeChoice != 1 && *shapeChoice != 2) {
+                printf("Invalid option. Please enter 0, 1, or 2.\n\n");
+            }
+        }
+    } while (*shapeChoice != 0 && *shapeChoice != 1 && *shapeChoice != 2);
 }
 
+// reads 3 sides, but repeats if the user types something non-numeric -FL
 void getTriangleSides(int triangleSides[3]) {
-    printf("Enter the three sides of the triangle: ");
+    int scanned;
+
+    printf("Enter the three sides of the triangle:\n");
     for (int i = 0; i < 3; i++) {
-        scanf_s("%d", &triangleSides[i]);
+        do {
+            printf("Side %d: ", i + 1);
+            scanned = scanf_s("%d", &triangleSides[i]);
+
+            if (scanned != 1) {
+                printf("Invalid input. Please enter a number.\n");
+                clearInputBuffer();
+            }
+        } while (scanned != 1);
+
+        clearInputBuffer();
     }
 }
 
+// reads 4 points, each as two ints; repeats if input is bad -FL
 void getRectanglePoints(int points_x[4], int points_y[4]) {
+    int scanned;
+
     printf("Enter 4 points as x y:\n");
     for (int i = 0; i < 4; i++) {
-        printf("Point %d: ", i + 1);
-        scanf_s("%d %d", &points_x[i], &points_y[i]);
+        do {
+            printf("Point %d (x y): ", i + 1);
+            scanned = scanf_s("%d %d", &points_x[i], &points_y[i]);
+
+            if (scanned != 2) {
+                printf("Invalid input. Please enter two integers like: 0 2\n");
+                clearInputBuffer();
+            }
+        } while (scanned != 2);
+
+        clearInputBuffer();
     }
 }
 
-//Triangle workflow 
+// Triangle workflow -FL
 
 void handleTriangle(void) {
     int triangleSides[3] = { 0, 0, 0 };
@@ -176,7 +226,7 @@ void handleTriangle(void) {
     }
 }
 
-//Rectangle workflow 
+// Rectangle workflow -FL
 
 void handleRectangle(void) {
     int px[4], py[4];
@@ -184,20 +234,20 @@ void handleRectangle(void) {
 
     getRectanglePoints(px, py);
 
-    // order points counter-clockwise 
+    // order points counter-clockwise -FL
     sort4PointsCCW(px, py, order);
 
-    //build A B C D arrays 
+    // build A B C D arrays -FL
     int A[2] = { px[order[0]], py[order[0]] };
     int B[2] = { px[order[1]], py[order[1]] };
     int C[2] = { px[order[2]], py[order[2]] };
     int D[2] = { px[order[3]], py[order[3]] };
 
-    // perimeter always 
+    // perimeter always -FL
     float perimeter = shapePerimeter(A, B, C, D);
     printf("\nPerimeter: %.2f\n", perimeter);
 
-    //i rectangle check 
+    // rectangle check -FL
     char* rectResult = isRectangle(px, py, order);
 
     if (strcmp(rectResult, "Is a rectangle") == 0) {
@@ -209,3 +259,4 @@ void handleRectangle(void) {
         printf("This shape is not a rectangle.\n\n");
     }
 }
+
