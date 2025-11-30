@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdbool.h>
 
 #include "main.h"
@@ -27,7 +27,8 @@ int main() {
 			break;
 		default:
 			printf_s("Invalid value entered.\n");
-			break;
+	
+	break;
 		}
 	}
 	return 0;
@@ -58,4 +59,153 @@ void getTriangleSides(int* triangleSides) {
 	{
 		scanf_s("%d", &triangleSides[i]);
 	}
+}
+
+*/
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+#include "triangleSolver.h"
+#include "rectangleSolver.h"
+
+//Function prototypes 
+void printWelcome(void);
+void printShapeMenu(int* shapeChoice);
+void getTriangleSides(int triangleSides[3]);
+void getRectanglePoints(int points_x[4], int points_y[4]);
+void handleTriangle(void);
+void handleRectangle(void);
+
+int main(void) {
+    bool continueProgram = true;
+
+    while (continueProgram) {
+        printWelcome();
+
+        int shapeChoice = -1;
+        printShapeMenu(&shapeChoice);
+
+        switch (shapeChoice) {
+        case 1:
+            handleTriangle();
+            break;
+
+        case 2:
+            handleRectangle();
+            break;
+
+        case 0:
+            continueProgram = false;
+            printf("Exiting program.\n");
+            break;
+
+        default:
+            printf("Invalid value entered.\n\n");
+            break;
+        }
+    }
+
+    return 0;
+}
+
+// Menu and input functions 
+
+void printWelcome(void) {
+    printf("\n");
+    printf(" Polygon Checker \n");
+    printf("-----------------\n\n");
+}
+
+void printShapeMenu(int* shapeChoice) {
+    printf("Choose a shape:\n");
+    printf("1. Triangle (type and angles)\n");
+    printf("2. Four points (perimeter and rectangle check)\n");
+    printf("0. Exit\n");
+    printf("Enter number: ");
+
+    scanf_s("%d", shapeChoice);
+}
+
+void getTriangleSides(int triangleSides[3]) {
+    printf("Enter the three sides of the triangle: ");
+    for (int i = 0; i < 3; i++) {
+        scanf_s("%d", &triangleSides[i]);
+    }
+}
+
+void getRectanglePoints(int points_x[4], int points_y[4]) {
+    printf("Enter 4 points as x y:\n");
+    for (int i = 0; i < 4; i++) {
+        printf("Point %d: ", i + 1);
+        scanf_s("%d %d", &points_x[i], &points_y[i]);
+    }
+}
+
+//Triangle workflow 
+
+void handleTriangle(void) {
+    int triangleSides[3] = { 0, 0, 0 };
+    getTriangleSides(triangleSides);
+
+    char* type = analyzeTriangle(triangleSides[0],
+        triangleSides[1],
+        triangleSides[2]);
+
+    printf("\nTriangle type: %s\n", type);
+
+    if (strcmp(type, "Not a triangle") != 0) {
+        float angles[3] = { 0.0f, 0.0f, 0.0f };
+        triangleAngles(triangleSides[0],
+            triangleSides[1],
+            triangleSides[2],
+            angles);
+
+        if (angles[0] < 0 || angles[1] < 0 || angles[2] < 0) {
+            printf("Could not compute angles.\n\n");
+            return;
+        }
+
+        float sum = angles[0] + angles[1] + angles[2];
+        printf("Angles in degrees:\n");
+        printf("A = %.2f\n", angles[0]);
+        printf("B = %.2f\n", angles[1]);
+        printf("C = %.2f\n", angles[2]);
+        printf("Sum = %.2f\n\n", sum);
+    }
+}
+
+//Rectangle workflow 
+
+void handleRectangle(void) {
+    int px[4], py[4];
+    int order[4];
+
+    getRectanglePoints(px, py);
+
+    // order points counter-clockwise 
+    sort4PointsCCW(px, py, order);
+
+    //build A B C D arrays 
+    int A[2] = { px[order[0]], py[order[0]] };
+    int B[2] = { px[order[1]], py[order[1]] };
+    int C[2] = { px[order[2]], py[order[2]] };
+    int D[2] = { px[order[3]], py[order[3]] };
+
+    // perimeter always 
+    float perimeter = shapePerimeter(A, B, C, D);
+    printf("\nPerimeter: %.2f\n", perimeter);
+
+    //i rectangle check 
+    char* rectResult = isRectangle(px, py, order);
+
+    if (strcmp(rectResult, "Is a rectangle") == 0) {
+        float area = RectArea(A, B, C);
+        printf("This shape is a rectangle.\n");
+        printf("Area: %.2f\n\n", area);
+    }
+    else {
+        printf("This shape is not a rectangle.\n\n");
+    }
 }
