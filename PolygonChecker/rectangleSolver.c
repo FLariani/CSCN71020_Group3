@@ -4,34 +4,6 @@
 
 #include "rectangleSolver.h"
 #include "triangleSolver.h"
-//finds distance between two points
-double dOfPoints(int pointP[], int pointQ[]) {
-	double deltaX = pointQ[0] - pointP[0]  ;
-	double deltaY = pointQ[1] - pointP[1];
-	double distance = sqrtf((powf(deltaX, 2)) + (powf(deltaY, 2)));
-	return distance;
-}
-
-// takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
-double shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
-	double sum = 0;
-	sum += dOfPoints(PointA, PointB);
-	sum += dOfPoints(PointB, PointC);
-	sum += dOfPoints(PointC, PointD);
-	sum += dOfPoints(PointD, PointA);
-	return sum;
-}
-
-//area
-double RectArea(int PointA[], int PointB[], int PointC[]) {
-	double Area = 0;
-	double sideA = dOfPoints(PointA, PointB);
-	double sideB = dOfPoints(PointB, PointC);
-	Area = sideA * sideB;
-	return Area;
-}
-
-
 
 //ok the working ordering function for the 4 points outputs an indexes (a,b,c,d) -DW
 // before that, we need to sort points lowest to highest y and x value with sort4PointsXY -DW
@@ -231,4 +203,35 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 	}
 	return "Is a rectangle";
 }
+
+//finds distance between two points
+double dOfPoints(int pointP[], int pointQ[]) {
+	double deltaX = pointQ[0] - pointP[0]  ;
+	double deltaY = pointQ[1] - pointP[1];
+	double distance = sqrtf((powf(deltaX, 2)) + (powf(deltaY, 2)));
+	return distance;
+}
+
+// takes the 4 points and returns the perimeter, assumes points are connected so a->b->c->d->a
+double shapePerimeter(int PointA[], int PointB[], int PointC[], int PointD[]) {
+	double sum = 0;
+	sum += dOfPoints(PointA, PointB);
+	sum += dOfPoints(PointB, PointC);
+	sum += dOfPoints(PointC, PointD);
+	sum += dOfPoints(PointD, PointA);
+	return sum;
+}
+
+//area
+double RectArea(int PointA[], int PointB[], int PointC[]) {
+	double Area = 0;
+	double sideA = dOfPoints(PointA, PointB);
+	double sideB = dOfPoints(PointB, PointC);
+	Area = sideA * sideB;
+	return Area;
+}
+
+
+
+
 

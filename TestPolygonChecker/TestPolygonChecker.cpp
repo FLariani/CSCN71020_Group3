@@ -18,8 +18,139 @@ extern "C" {
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+// Helper for float comparison
+static bool ApproxEqual(float a, float b, float eps = 0.01f)
+{
+	return fabs(a - b) <= eps;
+}
+namespace TestTriangle
+{
+
+	TEST_CLASS(TriangleTypeTests)
+	{
+	public:
+
+		TEST_METHOD(NotTriangle_ZeroOrNegative)
+		{
+			Assert::IsTrue(strcmp(analyzeTriangle(0, 3, 4), "Not a triangle") == 0);
+			Assert::IsTrue(strcmp(analyzeTriangle(-1, 3, 3), "Not a triangle") == 0);
+			Assert::IsTrue(strcmp(analyzeTriangle(3, -2, 3), "Not a triangle") == 0);
+			Assert::IsTrue(strcmp(analyzeTriangle(3, 3, -5), "Not a triangle") == 0);
+		}
+
+		TEST_METHOD(NotTriangle_InequalityFails)
+		{
+			Assert::IsTrue(strcmp(analyzeTriangle(1, 2, 100), "Not a triangle") == 0);
+			Assert::IsTrue(strcmp(analyzeTriangle(2, 3, 5), "Not a triangle") == 0);
+		}
+
+		TEST_METHOD(Equilateral_333)
+		{
+			Assert::IsTrue(strcmp(analyzeTriangle(3, 3, 3), "Equilateral triangle") == 0);
+		}
+
+		TEST_METHOD(Isosceles_AllPermutations_445)
+		{
+			Assert::IsTrue(strcmp(analyzeTriangle(4, 4, 5), "Isosceles triangle") == 0);
+			Assert::IsTrue(strcmp(analyzeTriangle(4, 5, 4), "Isosceles triangle") == 0);
+			Assert::IsTrue(strcmp(analyzeTriangle(5, 4, 4), "Isosceles triangle") == 0);
+		}
+
+		TEST_METHOD(Scalene_345)
+		{
+			Assert::IsTrue(strcmp(analyzeTriangle(3, 4, 5), "Scalene triangle") == 0);
+		}
+
+		TEST_METHOD(Scalene_456)
+		{
+			Assert::IsTrue(strcmp(analyzeTriangle(4, 5, 6), "Scalene triangle") == 0);
+		}
+	};
+
+
+
+	TEST_CLASS(TriAreaTests)
+	{
+	public:
+
+		TEST_METHOD(InvalidSides_ReturnNegative)
+		{
+			Assert::IsTrue(triArea(0, 3, 4) < 0);
+			Assert::IsTrue(triArea(-1, 3, 4) < 0);
+			Assert::IsTrue(triArea(1, 2, 100) < 0);
+		}
+
+		TEST_METHOD(Area_ThreeFourFive_IsSix)
+		{
+			Assert::IsTrue(ApproxEqual(triArea(3, 4, 5), 6.0f));
+		}
+
+		TEST_METHOD(Area_EquilateralSide2)
+		{
+			Assert::IsTrue(ApproxEqual(triArea(2, 2, 2), 1.732f, 0.01f));
+		}
+
+		TEST_METHOD(Area_Scalene_456)
+		{
+			// Heron's formula = 9.92
+			Assert::IsTrue(ApproxEqual(triArea(4, 5, 6), 9.92f, 0.05f));
+		}
+	};
+
+
+
+	TEST_CLASS(TriAnglesTests)
+	{
+	public:
+
+		TEST_METHOD(InvalidTriangle_AllAnglesNegative)
+		{
+			float angles[3];
+			triangleAngles(1, 2, 100, angles);
+
+			Assert::IsTrue(angles[0] < 0);
+			Assert::IsTrue(angles[1] < 0);
+			Assert::IsTrue(angles[2] < 0);
+		}
+
+		TEST_METHOD(Equilateral_AllAngles60)
+		{
+			float angles[3];
+			triangleAngles(3, 3, 3, angles);
+
+			Assert::IsTrue(ApproxEqual(angles[0], 60.0f, 0.3f));
+			Assert::IsTrue(ApproxEqual(angles[1], 60.0f, 0.3f));
+			Assert::IsTrue(ApproxEqual(angles[2], 60.0f, 0.3f));
+		}
+
+		TEST_METHOD(ThreeFourFive_Has90DegreeAngle_AndSum180)
+		{
+			float angles[3];
+			triangleAngles(3, 4, 5, angles);
+
+			// biggest side is 5 angle2 should be 90-ish
+			Assert::IsTrue(ApproxEqual(angles[2], 90.0f, 0.5f));
+
+			float sum = angles[0] + angles[1] + angles[2];
+			Assert::IsTrue(ApproxEqual(sum, 180.0f, 0.5f));
+		}
+
+		TEST_METHOD(Isosceles_TwoAnglesMatch)
+		{
+			float angles[3];
+			triangleAngles(5, 5, 8, angles);
+
+			Assert::IsTrue(
+				ApproxEqual(angles[0], angles[1], 0.5f) ||
+				ApproxEqual(angles[0], angles[2], 0.5f) ||
+				ApproxEqual(angles[1], angles[2], 0.5f)
+			);
+		}
+	};
+
+}
 namespace TestRectangle {
-	//ALL TEST METHODS PASSED FOR SORT4POINTSXY -DW
+
 	//tests all combinations of sorting arrangements (total 24/2 for unique combinations for points_x and points_y) -DW
 	TEST_CLASS(Sorted4PointsXY) {
 
@@ -862,9 +993,6 @@ public:
 		}
 	}
 
-
-
-	//real one
 	TEST_METHOD(sort4PointsCCW_Trapezium_007)
 	{
 		int points_X[4] = { 25, 10, 20, 10 };
@@ -1921,140 +2049,3 @@ public:
 	}
 	};
 };
-	
-	
-		
-	
-
-
-	// Helper for float comparison
-	static bool ApproxEqual(float a, float b, float eps = 0.01f)
-	{
-		return fabs(a - b) <= eps;
-	}
-	namespace TestTriangle
-	{
-
-		TEST_CLASS(TriangleTypeTests)
-		{
-		public:
-
-			TEST_METHOD(NotTriangle_ZeroOrNegative)
-			{
-				Assert::IsTrue(strcmp(analyzeTriangle(0, 3, 4), "Not a triangle") == 0);
-				Assert::IsTrue(strcmp(analyzeTriangle(-1, 3, 3), "Not a triangle") == 0);
-				Assert::IsTrue(strcmp(analyzeTriangle(3, -2, 3), "Not a triangle") == 0);
-				Assert::IsTrue(strcmp(analyzeTriangle(3, 3, -5), "Not a triangle") == 0);
-			}
-
-			TEST_METHOD(NotTriangle_InequalityFails)
-			{
-				Assert::IsTrue(strcmp(analyzeTriangle(1, 2, 100), "Not a triangle") == 0);
-				Assert::IsTrue(strcmp(analyzeTriangle(2, 3, 5), "Not a triangle") == 0);
-			}
-
-			TEST_METHOD(Equilateral_333)
-			{
-				Assert::IsTrue(strcmp(analyzeTriangle(3, 3, 3), "Equilateral triangle") == 0);
-			}
-
-			TEST_METHOD(Isosceles_AllPermutations_445)
-			{
-				Assert::IsTrue(strcmp(analyzeTriangle(4, 4, 5), "Isosceles triangle") == 0);
-				Assert::IsTrue(strcmp(analyzeTriangle(4, 5, 4), "Isosceles triangle") == 0);
-				Assert::IsTrue(strcmp(analyzeTriangle(5, 4, 4), "Isosceles triangle") == 0);
-			}
-
-			TEST_METHOD(Scalene_345)
-			{
-				Assert::IsTrue(strcmp(analyzeTriangle(3, 4, 5), "Scalene triangle") == 0);
-			}
-
-			TEST_METHOD(Scalene_456)
-			{
-				Assert::IsTrue(strcmp(analyzeTriangle(4, 5, 6), "Scalene triangle") == 0);
-			}
-		};
-
-
-
-		TEST_CLASS(TriAreaTests)
-		{
-		public:
-
-			TEST_METHOD(InvalidSides_ReturnNegative)
-			{
-				Assert::IsTrue(triArea(0, 3, 4) < 0);
-				Assert::IsTrue(triArea(-1, 3, 4) < 0);
-				Assert::IsTrue(triArea(1, 2, 100) < 0);
-			}
-
-			TEST_METHOD(Area_ThreeFourFive_IsSix)
-			{
-				Assert::IsTrue(ApproxEqual(triArea(3, 4, 5), 6.0f));
-			}
-
-			TEST_METHOD(Area_EquilateralSide2)
-			{
-				Assert::IsTrue(ApproxEqual(triArea(2, 2, 2), 1.732f, 0.01f));
-			}
-
-			TEST_METHOD(Area_Scalene_456)
-			{
-				// Heron's formula = 9.92
-				Assert::IsTrue(ApproxEqual(triArea(4, 5, 6), 9.92f, 0.05f));
-			}
-		};
-
-
-
-		TEST_CLASS(TriAnglesTests)
-		{
-		public:
-
-			TEST_METHOD(InvalidTriangle_AllAnglesNegative)
-			{
-				float angles[3];
-				triangleAngles(1, 2, 100, angles);
-
-				Assert::IsTrue(angles[0] < 0);
-				Assert::IsTrue(angles[1] < 0);
-				Assert::IsTrue(angles[2] < 0);
-			}
-
-			TEST_METHOD(Equilateral_AllAngles60)
-			{
-				float angles[3];
-				triangleAngles(3, 3, 3, angles);
-
-				Assert::IsTrue(ApproxEqual(angles[0], 60.0f, 0.3f));
-				Assert::IsTrue(ApproxEqual(angles[1], 60.0f, 0.3f));
-				Assert::IsTrue(ApproxEqual(angles[2], 60.0f, 0.3f));
-			}
-
-			TEST_METHOD(ThreeFourFive_Has90DegreeAngle_AndSum180)
-			{
-				float angles[3];
-				triangleAngles(3, 4, 5, angles);
-
-				// biggest side is 5 angle2 should be 90-ish
-				Assert::IsTrue(ApproxEqual(angles[2], 90.0f, 0.5f));
-
-				float sum = angles[0] + angles[1] + angles[2];
-				Assert::IsTrue(ApproxEqual(sum, 180.0f, 0.5f));
-			}
-
-			TEST_METHOD(Isosceles_TwoAnglesMatch)
-			{
-				float angles[3];
-				triangleAngles(5, 5, 8, angles);
-
-				Assert::IsTrue(
-					ApproxEqual(angles[0], angles[1], 0.5f) ||
-					ApproxEqual(angles[0], angles[2], 0.5f) ||
-					ApproxEqual(angles[1], angles[2], 0.5f)
-				);
-			}
-		};
-
-	}
