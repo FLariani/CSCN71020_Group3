@@ -370,10 +370,10 @@ char* isRectangle(int points_x[], int points_y[], int sorted_points[]) {
 		}
 		
 		//finds the translation of x and y between the tested cooordinate and the next or previous coordinate -DW
-		long nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
-		long nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
-		long prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
-		long prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
+		long long nextDeltaX = points_x[nextPoint] - points_x[sorted_points[x]];
+		long long nextDeltaY = points_y[nextPoint] - points_y[sorted_points[x]];
+		long long prevDeltaX = points_x[prevPoint] - points_x[sorted_points[x]];
+		long long prevDeltaY = points_y[prevPoint] - points_y[sorted_points[x]];
 
 		//if dot product is not 0 then the angle is not 90 degrees -DW
 		//if the delta X and Y between the coordinate being tested and the next/previous coodinate is 0 then it is a duplicate coordinate -DW
