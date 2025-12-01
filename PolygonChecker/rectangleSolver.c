@@ -5,8 +5,8 @@
 #include "rectangleSolver.h"
 #include "triangleSolver.h"
 
-//ok the working ordering function for the 4 points outputs an indexes (a,b,c,d) -DW
-// before that, we need to sort points lowest to highest y and x value with sort4PointsXY -DW
+
+//sorts points from lowest to highest value -DW
 void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[]) {
 
 	//initializes original index order of points_x[] and points_y to be swapped -DW
@@ -22,6 +22,7 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 
 			if (points_x[sorted_x[i]] >= points_x[sorted_x[j]]) {
 
+				//checks when points are of equal value to switch to user's first input x-value -DW
 				if ((sorted_x[i] < sorted_x[j]) && (points_x[sorted_x[i]] == points_x[sorted_x[j]])) {}
 				else {
 
@@ -33,6 +34,7 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 
 			if (points_y[sorted_y[i]] >= points_y[sorted_y[j]]) {
 
+				//checks when points are of equal value to switch to user's first input y-value -DW
 				if ((sorted_y[i] < sorted_y[j]) && (points_y[sorted_y[i]] == points_y[sorted_y[j]])) {}
 				else {
 					int temp = sorted_y[i];
@@ -44,6 +46,8 @@ void sort4PointsXY(int points_x[], int points_y[], int sorted_x[], int sorted_y[
 	}
 }
 
+//The ordering function for the 4 points outputs in indexes (a,b,c,d) -DW
+// before that, we need to sort points lowest to highest y and x value with sort4PointsXY -DW
 void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 
 	int sorted_x[4] = { -1,-1,-1,-1 };
@@ -88,8 +92,9 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 		}
 	}
 	
-	//used to determine the 3 collinear points
-	int flag = -1;
+	//used to determine ordering with colinear points
+	int flag_colinear = -1;
+
 	//find sorted_points[1], [2], [3] by smallest angle -DW
 	//angle is determined by dx and dy relative to sorted_points[0] or point A -DW
 	//use sorted_x as a tie-breaker for cross==0 -DW
@@ -128,7 +133,8 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 			//cross has a value of 0 when both i and next_point are colinear to point A (or sorted_points[0] -DW
 			else if (cross == 0) {
 
-				if (point_letter == 2 && flag != sorted_points[1]) {
+				//if pointB was not colinear when C and D are -DW
+				if (point_letter == 2 && flag_colinear != sorted_points[1]) {
 					
 					if (position_sorted_y[i] > position_sorted_y[next_point]) {
 
@@ -142,13 +148,13 @@ void sort4PointsCCW(int points_x[], int points_y[], int sorted_points[]) {
 						next_point = i;
 					}
 				}
-				// for collinear use sorted_x position as tie-break (lowest y-value) -DW
+				// for collinear use sorted_y position as tie-break (lowest y-value) -DW
 				else if (position_sorted_y[i] < position_sorted_y[next_point]) {
 
 					next_point = i;
 				}
 
-				flag = next_point;
+				flag_colinear = next_point;
 			}
 		}
 		//adds the next coordinate to the next sorted points -DW
