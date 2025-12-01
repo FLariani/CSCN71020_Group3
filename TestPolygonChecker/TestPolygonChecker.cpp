@@ -152,63 +152,7 @@ namespace TestTriangle
 }
 namespace TestRectangle {
 
-	//tests all combinations of sorting arrangements (total 24/2 for unique combinations for points_x and points_y) -DW
-
-	TEST_CLASS(DistanceTests)
-	{
-	public:
-
-		TEST_METHOD(Distance_SamePoint_ReturnsZero)
-		{
-			int p[2] = { 0, 0 };   // same point P -FL
-			int q[2] = { 0, 0 };   // same point Q -FL
-
-			double result = dOfPoints(p, q); // distance should be 0 -FL
-
-			Assert::AreEqual(0.0, result, 0.0001); // verify zero distance adding 0.0001 to avoid false positives -FL
-		}
-
-		TEST_METHOD(Distance_Horizontal_Positive)
-		{
-			int p[2] = { 0, 0 };   // start point -FL
-			int q[2] = { 5, 0 };   // horizontal movement only -FL
-
-			double result = dOfPoints(p, q); // expected distance = 5 -FL
-
-			Assert::AreEqual(5.0, result, 0.0001); // check correct horizontal dist -FL
-		}
-
-		TEST_METHOD(Distance_Vertical_Positive)
-		{
-			int p[2] = { 2, 3 };   // start point -FL
-			int q[2] = { 2, 10 };  // vertical movement only -FL
-
-			double result = dOfPoints(p, q); // expected distance = 7 -FL
-
-			Assert::AreEqual(7.0, result, 0.0001); // check correct vertical dist -FL
-		}
-
-		TEST_METHOD(Distance_Diagonal_Classic345)
-		{
-			int p[2] = { 0, 0 };   // start point -FL
-			int q[2] = { 3, 4 };   // classic 3-4-5 triangle -FL
-
-			double result = dOfPoints(p, q); // exected distance = 5 -FL
-
-			Assert::AreEqual(5.0, result, 0.0001); // verify Pythagorean case -FL
-		}
-
-		TEST_METHOD(Distance_LargerNumbers)
-		{
-			int p[2] = { 10, 20 };   // shifted point -FL
-			int q[2] = { 13, 24 };   // another point creating 3-4-5 distance -FL
-
-			double result = dOfPoints(p, q); // expected distance = 5 -FL
-
-			Assert::AreEqual(5.0, result, 0.0001); // ensure accuracy with larger coords -FL
-		}
-	};
-
+//tests all combinations of sorting arrangements (total 24/2 for unique combinations for points_x and points_y) -DW
 	TEST_CLASS(Sorted4PointsXY) {
 
 public:
@@ -1575,6 +1519,62 @@ public:
 		Assert::IsTrue(strcmp(isRectangle(points_X, points_Y, sorted_points), "Not a rectangle") == 0);
 	}
 	};
+
+	TEST_CLASS(DistanceTests)
+	{
+	public:
+
+		TEST_METHOD(Distance_SamePoint_ReturnsZero)
+		{
+			int p[2] = { 0, 0 };   // same point P -FL
+			int q[2] = { 0, 0 };   // same point Q -FL
+
+			double result = dOfPoints(p, q); // distance should be 0 -FL
+
+			Assert::AreEqual(0.0, result, 0.0001); // verify zero distance adding 0.0001 to avoid false positives -FL
+		}
+
+		TEST_METHOD(Distance_Horizontal_Positive)
+		{
+			int p[2] = { 0, 0 };   // start point -FL
+			int q[2] = { 5, 0 };   // horizontal movement only -FL
+
+			double result = dOfPoints(p, q); // expected distance = 5 -FL
+
+			Assert::AreEqual(5.0, result, 0.0001); // check correct horizontal dist -FL
+		}
+
+		TEST_METHOD(Distance_Vertical_Positive)
+		{
+			int p[2] = { 2, 3 };   // start point -FL
+			int q[2] = { 2, 10 };  // vertical movement only -FL
+
+			double result = dOfPoints(p, q); // expected distance = 7 -FL
+
+			Assert::AreEqual(7.0, result, 0.0001); // check correct vertical dist -FL
+		}
+
+		TEST_METHOD(Distance_Diagonal_Classic345)
+		{
+			int p[2] = { 0, 0 };   // start point -FL
+			int q[2] = { 3, 4 };   // classic 3-4-5 triangle -FL
+
+			double result = dOfPoints(p, q); // exected distance = 5 -FL
+
+			Assert::AreEqual(5.0, result, 0.0001); // verify Pythagorean case -FL
+		}
+
+		TEST_METHOD(Distance_LargerNumbers)
+		{
+			int p[2] = { 10, 20 };   // shifted point -FL
+			int q[2] = { 13, 24 };   // another point creating 3-4-5 distance -FL
+
+			double result = dOfPoints(p, q); // expected distance = 5 -FL
+
+			Assert::AreEqual(5.0, result, 0.0001); // ensure accuracy with larger coords -FL
+		}
+	};
+
 	TEST_CLASS(RectanglePerimeter) {
 
 public:
